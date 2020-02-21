@@ -11,7 +11,7 @@
 <body>
 __HEADER_TOP__
 <div id="main">
-	<canvas id="canvas" width="400" height="300"></canvas>
+	<img src="__ROOT__/img/MODS_welcome.png" width="600" />
 	<br />
 	<div class="intro">
 		We are a server dedicated to exploring beautiful maths problems and learning how to solve them. We welcome people of all ages, abilities, and aspirations. While many of our members have participated in contests ranging from local competitions to the IMO, we believe that the awesomeness of mathematics can be enjoyed by everyone!
@@ -31,14 +31,5 @@ __HEADER_TOP__
 	-->
 </div>
 __FOOTER__
-<script>
-const canvas = document.getElementById("canvas")
-const ctx = canvas.getContext("2d")
-const img = new Image()
-img.src = "__ROOT__/img/MODS_welcome.png"
-img.onload = () => {
-	ctx.drawImage(img, 0, 0)
-}
-</script>
 </body>
 </html>
