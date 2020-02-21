@@ -8,17 +8,17 @@ def makedirs(path):
         pass
 
 def readfile(path):
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding="utf8") as file:
         return file.read()
 
 def writefile(path, content):
-    with open(path, 'w') as file:
+    with open(path, 'w', encoding="utf8") as file:
         return file.write(content)
-        
+
 def copyfile(_from, to):
     # sry shutil
     writefile(to, readfile(_from))
-        
+
 def ordinal(number):
     if number[-1] == "1":
         return "st"
