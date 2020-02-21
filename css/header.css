@@ -4,7 +4,7 @@
 
  *  *  *  *  *  *  *  *  *  *  *  */
 
-#header { 
+#header {
 	font-weight: bold;
 	background-color: #FCFCD9;
 }
@@ -23,7 +23,7 @@
 
 
 #header #sub {
-	position: absolute; 
+	position: absolute;
 	margin: 0em;
 	width: 100%;
 	text-align: center;
@@ -49,9 +49,9 @@
 }
 
 #header .img img {
-	height: 1.5em;
-	width: 2.25em;
-	margin-bottom: -0.4em;
+	height: 1.8em;
+	width: 1.8em;
+	margin-bottom: -0.55em;
 	border: 0;
 }
 
@@ -109,7 +109,7 @@
     background-color: #ffd700;
     text-decoration: none;
 }
-	
+
 #header #lang a.highlight
 {
     color: black;
@@ -117,13 +117,13 @@
     text-decoration: none;
 }
 
-#langForm 
+#langForm
 {	position: absolute;
 	top: 0.75em;
 	right: 0.5em;
 	text-align: right;
 	font-size: 0.8em;
-	z-index: 9; 
+	z-index: 9;
 }
 
 #langForm a, #langForm a:visited
@@ -141,7 +141,7 @@
     background-color: #ffd700;
     text-decoration: none;
 }
-	
+
 #langForm a.highlight, #langForm input.highlight
 {
     color: black;
@@ -167,7 +167,7 @@
 	text-align: left;
 	height: 1.2em;
 	font-size: 0.8em;
-	z-index: 9; 
+	z-index: 9;
 }
 
 #logoutBtn input
