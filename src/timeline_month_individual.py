@@ -35,12 +35,6 @@ def run(month):
     if month in s_db_y:
         for row in s_db_y[month]:
             rowhtml = templates.get("timeline/month/individual_row")
-            if row["code"] == "":
-                rowhtml = rowhtml.replace("__CODE__", "TUR") # Yup, this is my hack
-                rowhtml = rowhtml.replace("__COUNTRY__", "")
-            else:
-                rowhtml = rowhtml.replace("__CODE__", row["code"])
-                rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
             if row["website"]:
                 link = templates.get("timeline/month/individual_student_link")
                 link = link.replace("__LINK__", row["website"])

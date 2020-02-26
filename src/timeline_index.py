@@ -16,10 +16,6 @@ def run():
         rowhtml = rowhtml.replace("__NUMBER__", row["number"])
         rowhtml = rowhtml.replace("__MONTH__", row["month"])
         rowhtml = rowhtml.replace("__DATE__", row["date"])
-        rowhtml = rowhtml.replace("__CODE__", row["code"])
-        rowhtml = rowhtml.replace("__CITY__", row["city"])
-        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[row["code"]])
-        rowhtml = rowhtml.replace("__P_COUNTRY__", row["p_country"])
         rowhtml = rowhtml.replace("__P_STUDENT__", row["p_student"])
         if "code2" in row:
             rowhtml = rowhtml.replace("__CODE2__", row["code2"])

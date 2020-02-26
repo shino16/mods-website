@@ -35,11 +35,8 @@ def run(month):
     medals = {}
     if month in s_db_y:
         for row in s_db_y[month]:
-            if row["code"] == "":
-                # Country unknown
-                continue
-            if row["code"] not in medals:
-                medals[row["code"]] = {
+            if row["name"] not in medals:
+                medals[row["name"]] = {
                     "bestrank": int(row["rank"]),
                     "bestrank>=": "&ge;" if row["rank>="] else "",
                     "gold": 0,
@@ -48,13 +45,13 @@ def run(month):
                     "honourable": 0
                     }
             if row["medal"] == "G":
-                medals[row["code"]]["gold"] += 1
+                medals[row["name"]]["gold"] += 1
             elif row["medal"] == "S":
-                medals[row["code"]]["silver"] += 1
+                medals[row["name"]]["silver"] += 1
             elif row["medal"] == "B":
-                medals[row["code"]]["bronze"] += 1
+                medals[row["name"]]["bronze"] += 1
             elif row["medal"] == "H":
-                medals[row["code"]]["honourable"] += 1
+                medals[row["name"]]["honourable"] += 1
 
     def keyfn(code):
         m = medals[code]
@@ -69,7 +66,6 @@ def run(month):
     for i, code in enumerate(sortedcodes):
         rowhtml = templates.get("timeline/month/country_row")
         rowhtml = rowhtml.replace("__CODE__", code)
-        rowhtml = rowhtml.replace("__COUNTRY__", code_to_country[code])
         if prevcode != "" and keyfn(prevcode)[:-1] == keyfn(code)[:-1]:
             rowhtml = rowhtml.replace("__RANK__", prevrank)
         else:

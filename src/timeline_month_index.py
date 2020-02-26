@@ -17,21 +17,7 @@ def run(month):
     html = html.replace("__NUMBER__", monthdata["number"])
     html = html.replace("__ORDINAL__", util.ordinal(monthdata["number"]))
     html = html.replace("__DATE__", monthdata["date"])
-    html = html.replace("__CODE__", monthdata["code"])
-    html = html.replace("__COUNTRY__", code_to_country[monthdata["code"]])
 
-    if "code2" in monthdata:
-        html = html.replace("__CODE2__", monthdata["code2"])
-        html = html.replace("__COUNTRY2__", code_to_country[monthdata["code2"]])
-        html = html.replace("__CODE2_STYLE__", "")
-    else:
-        html = html.replace("__CODE2_STYLE__", "display: none;")
-        html = html.replace("__CODE2__", ".") # Google crawler fix
-
-    if monthdata["city"] != "":
-        html = html.replace("__CITY__", monthdata["city"] + ",")
-    else:
-        html = html.replace("__CITY__", "")
 
     if month in previous_month:
         html = html.replace("__PREVIOUS_MONTH__", previous_month[month])
