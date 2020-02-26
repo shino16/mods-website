@@ -37,20 +37,20 @@ do
         html="${html//__CODE__/$1}"
         html="${html//__COUNTRY__/${countrycodes[$1]}}"
         table=""
-        lastyear=""
-        yearrows=""
+        lastmonth=""
+        monthrows=""
         t_row="$(cat templates/countries/code/individual_row.html)"
         t_gold="$(cat templates/countries/code/individual_gold.html)"
         t_silver="$(cat templates/countries/code/individual_silver.html)"
         t_bronze="$(cat templates/countries/code/individual_bronze.html)"
         t_honourable="$(cat templates/countries/code/individual_honourable.html)"
-        while IFS=, read name _code year rank medal newline
+        while IFS=, read name _code month rank medal newline
         do
             if [ "$_code" == "$1" ]
             then
                 row="${t_row//__NAME__/$name}"
                 row="${row//__RANK__/$rank}"
-                row="${row//__YEAR__/$year}"
+                row="${row//__MONTH__/$month}"
                 case $medal in
                 1) row="${row//__MEDAL__/$t_gold}" ;;
                 2) row="${row//__MEDAL__/$t_silver}" ;;
@@ -58,19 +58,19 @@ do
                 4) row="${row//__MEDAL__/$t_honourable}" ;;
                 *) row="${row//__MEDAL__/}" ;;
                 esac
-                if [ "$lastyear" == "$year" ]
+                if [ "$lastmonth" == "$month" ]
                 then
                     row="${row//__CLASS__/}"
-                    yearrows=$yearrows$row
+                    monthrows=$monthrows$row
                 else
-                    table=$yearrows$table
+                    table=$monthrows$table
                     row="${row//__CLASS__/doubleTopLine}"
-                    yearrows=$row
-                    lastyear="$year"
+                    monthrows=$row
+                    lastmonth="$month"
                 fi
             fi
         done < database/estudiantes.csv
-        table=$yearrows$table
+        table=$monthrows$table
         html="${html//__TABLE__/$table}"
     fi
 done < database/countries.csv

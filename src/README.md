@@ -9,22 +9,22 @@ contains HTML files and database folder contains CSV data files.
 
 You can generate individual pages with scripts as well.
 
-After adding a new year increment config.py counters.
+After adding a new month increment config.py counters.
 
 ## Assumptions
 
 CSV files don't strictly obey CSV format. They are literally "comma separated values". Thus, names should not include commas.
 
 ##### database/estudiantes.csv:
-* Columns: year, rank, name, country code, medal, theoretical, experimental, total, website
+* Columns: month, rank, name, country code, medal, theoretical, experimental, total, website
 * Medal is one of: G, S, B, H, P.
-* Ordered first by year then by rank.
+* Ordered first by month then by rank.
 * Don't assume ranks are numbers. They can be in two forms: 1234 or >=1234
 * Country-code can be empty if unknown.
 
 ##### database/timeline.csv:
-* Columns: number, year, date, country code, city, website, # of countries, # of students
-* Ordered by year
+* Columns: number, month, date, country code, city, website, # of countries, # of students
+* Ordered by month
 
 ##### database/countries.csv:
 * Columns: country code, name, website, if former

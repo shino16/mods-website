@@ -14,7 +14,7 @@ def run():
     for row in t_db:
         rowhtml = templates.get("timeline/index_row")
         rowhtml = rowhtml.replace("__NUMBER__", row["number"])
-        rowhtml = rowhtml.replace("__YEAR__", row["year"])
+        rowhtml = rowhtml.replace("__MONTH__", row["month"])
         rowhtml = rowhtml.replace("__DATE__", row["date"])
         rowhtml = rowhtml.replace("__CODE__", row["code"])
         rowhtml = rowhtml.replace("__CITY__", row["city"])

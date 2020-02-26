@@ -42,7 +42,7 @@
                     var ps = lines[i].trim().split(",");
                     if (ps.length > 4) {
                         students.push({
-                            year: ps[0],
+                            month: ps[0],
                             rank: ps[1],
                             name: ps[2],
                             code: ps[3],
@@ -76,7 +76,7 @@
             if(students[i].name_ascii_lower.indexOf(query) != -1) {
                 var row = t_row.replace(/{{code}}/g, students[i].code)
                     .replace(/{{country}}/g, countries[students[i].code])
-                    .replace(/{{year}}/g, students[i].year);
+                    .replace(/{{month}}/g, students[i].month);
                 if (students[i].website) {
                     var link = t_website.replace(/{{name}}/, students[i].name)
                                         .replace(/{{link}}/, students[i].website);

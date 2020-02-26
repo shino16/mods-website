@@ -15,7 +15,7 @@ International Physics Olympiad
 	<!-- <img src="logo.png" /> -->
 	<br /><br /><br />
 	<div class="intro">
-		The International Physics Olympiad (IPhO) is the World Championship Physics Competition for High School students and is held annually in a different country. The first IPhO was held in 1967 in Poland. It has gradually expanded to over 100 countries from 5 continents. The IPhO International Board ensures that the competition takes place each year and that each host country observes the regulations and traditions of the IPhO.
+		The International Physics Olympiad (IPhO) is the World Championship Physics Competition for High School students and is held annually in a different country. The first IPhO was held in 1967 in Poland. It has gradually expanded to over 100 countries from 5 continents. The IPhO International Board ensures that the competition takes place each month and that each host country observes the regulations and traditions of the IPhO.
 	</div>
 	<br />
 	<div class="intro">
@@ -46,7 +46,7 @@ setInterval(function(){
 		ctx.arc(bx, by, br, 0, 7);
 		ctx.fill();
 		ctx.restore();
-		
+
 		ctx.save();
 		ctx.beginPath();
 		ctx.rect(200 - a / 2 + a * .18, 150 - a / 2 + a * .4, a * .6, a * .6);
@@ -60,7 +60,7 @@ setInterval(function(){
 		ctx.arc(bx, by, br, 0, 7);
 		ctx.fill();
 		ctx.restore();
-		
+
 		ctx.save();
 		ctx.beginPath();
 		ctx.rect(200 - a / 2, 150 - a / 2, a * .6, a * .6);

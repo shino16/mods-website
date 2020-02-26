@@ -32,19 +32,19 @@ def run(code):
 
     tablehtml = ""
     if code in s_db_c:
-        yearhtml = ""
-        lastyear = ""
+        monthhtml = ""
+        lastmonth = ""
         for studentdata in s_db_c[code]:
             rowhtml = templates.get("countries/code/individual_row")
             if studentdata["website"]:
-                link = templates.get("timeline/year/individual_student_link")
+                link = templates.get("timeline/month/individual_student_link")
                 link = link.replace("__LINK__", studentdata["website"])
                 link = link.replace("__NAME__", studentdata["name"])
                 rowhtml = rowhtml.replace("__NAME__", link)
             else:
                 rowhtml = rowhtml.replace("__NAME__", studentdata["name"])
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if studentdata["rank>="] else "") + studentdata["rank"])
-            rowhtml = rowhtml.replace("__YEAR__", studentdata["year"])
+            rowhtml = rowhtml.replace("__MONTH__", studentdata["month"])
             if studentdata["medal"] == "G":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_gold"))
             elif studentdata["medal"] == "S":
@@ -55,18 +55,18 @@ def run(code):
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("countries/code/individual_honourable"))
             else:
                 rowhtml = rowhtml.replace("__MEDAL__", "")
-            if lastyear == studentdata["year"]:
+            if lastmonth == studentdata["month"]:
                 rowhtml = rowhtml.replace("__CLASS__", "")
-                yearhtml += rowhtml
+                monthhtml += rowhtml
             else:
-                lastyear = studentdata["year"]
+                lastmonth = studentdata["month"]
                 # reverse ordered:
-                tablehtml = yearhtml + tablehtml
+                tablehtml = monthhtml + tablehtml
                 rowhtml = rowhtml.replace("__CLASS__", "doubleTopLine")
-                yearhtml = rowhtml
+                monthhtml = rowhtml
         # Hacky way of removing first double top line:
-        yearhtml = yearhtml.replace("doubleTopLine", "", 1)
-        tablehtml = yearhtml + tablehtml
+        monthhtml = monthhtml.replace("doubleTopLine", "", 1)
+        tablehtml = monthhtml + tablehtml
 
     html = html.replace("__TABLE__", tablehtml)
     html = templates.final_replace(html, "../..")

@@ -28,7 +28,7 @@ $conn->close();
 	</div>
 	<h2>
 	<? if($previouscountry) echo '<a href="country_individual.php?code='.$previouscountry['code'].'" class="pointer">&#9668;</a> '; ?>
-	<a href="country_info.php?code=<? echo $country['code']; ?>"><? echo $country['name']; ?></a>  
+	<a href="country_info.php?code=<? echo $country['code']; ?>"><? echo $country['name']; ?></a>
 	<? if($nextcountry) echo '<a href="country_individual.php?code='.$nextcountry['code'].'" class="pointer">&#9658;</a>'; ?></h2>
 	<h3>
 	<!-- <a id="ctl00_CPH_Main_HyperLinkTeam" class="hideprn" href="country_team.php?code=<? echo $country['code']; ?>">Team results</a> &bull; -->
@@ -37,19 +37,19 @@ $conn->close();
 	</h3>
 	<table>
 	<thead>
-	<tr><th rowspan="2" class="highlightDown">Year</th><th rowspan="2">Contestant</th><th colspan="2">Rank</th><th rowspan="2">Award</th></tr>
+	<tr><th rowspan="2" class="highlightDown">Month</th><th rowspan="2">Contestant</th><th colspan="2">Rank</th><th rowspan="2">Award</th></tr>
 	<tr><th><span class="hideprnI" title="Absolute ranking">Abs.</span></th><th><span class="hideprnI" title="Relative ranking">Rel.</span></th></tr>
 	</thead>
 	<tbody>
 	<?
 	$conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
 	if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-	$result2 = $conn->query("SELECT * FROM estudiante WHERE country='".$country['code']."' ORDER BY year DESC, rank ASC");
-	$lastyear = -1;
+	$result2 = $conn->query("SELECT * FROM estudiante WHERE country='".$country['code']."' ORDER BY month DESC, rank ASC");
+	$lastmonth = -1;
 	while($row = $result2->fetch_assoc()) {
-		$contestants = $conn->query("SELECT * FROM organizers WHERE year='".$row['year']."'")->fetch_assoc()['contestants'];
-		echo '<tr'.(($lastyear!=-1 && $lastyear!=$row['year'])?' class=" doubleTopLine"':'').'>
-		<td align="center"><a href="year_info.php?year='.$row['year'].'">'.$row['year'].'</a></td>
+		$contestants = $conn->query("SELECT * FROM organizers WHERE month='".$row['month']."'")->fetch_assoc()['contestants'];
+		echo '<tr'.(($lastmonth!=-1 && $lastmonth!=$row['month'])?' class=" doubleTopLine"':'').'>
+		<td align="center"><a href="month_info.php?month='.$row['month'].'">'.$row['month'].'</a></td>
 		<td>'.$row['name'].'</td>
 		<td align="right">'.$row['rank'].'</td>
 		<td align="right" class="doubleRightLine">'.
@@ -62,15 +62,15 @@ $conn->close();
 			case 4: echo '<img src="m_patates.png" width="9" height="9"> Honourable Mention'; break;
 		}
 		echo '</td></tr>';
-		$lastyear = $row['year'];
+		$lastmonth = $row['month'];
 	}
 	$conn->close();
 	?>
 	</tbody>
 	</table>
 	<div>
-		Results may not be complete and may include mistakes. 
-		Please send relevant information to the webmaster: 
+		Results may not be complete and may include mistakes.
+		Please send relevant information to the webmaster:
 		<a href="mailto:webmaster@ipho-official.org">webmaster@ipho-unofficial.org</a>.
 	</div>
 </div>

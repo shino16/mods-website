@@ -8,11 +8,11 @@
 $conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
-} 
+}
 $sql = "SELECT * FROM estudiante ORDER BY rank";
 if($result = $conn->query($sql)) {
 	while($row = $result->fetch_assoc()) {
-		echo $row['name'].",".$row['country'].",".$row['year'].",".$row['rank'].",".$row['medal']."<br>";
+		echo $row['name'].",".$row['country'].",".$row['month'].",".$row['rank'].",".$row['medal']."<br>";
 	}
 }
 $conn->close();

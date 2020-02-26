@@ -2,10 +2,10 @@
 import csv
 
 database = []
-year_indexed = {}
+month_indexed = {}
 code_grouped = {}
-previous_year = {}
-next_year = {}
+previous_month = {}
+next_month = {}
 
 with open("database/timeline.csv") as file:
     reader = csv.reader(file)
@@ -14,7 +14,7 @@ with open("database/timeline.csv") as file:
         assert len(row) == 8, "Timeline row error: {}".format(row)
         entry = {
             "number": row[0],
-            "year": row[1],
+            "month": row[1],
             "date": row[2],
             "city": row[4],
             "homepage": row[5],
@@ -26,9 +26,9 @@ with open("database/timeline.csv") as file:
             entry["code2"] = row[3].split("&")[1]
         else:
             entry["code"] = row[3]
-        
+
         database.append(entry)
-        year_indexed[entry["year"]] = entry
+        month_indexed[entry["month"]] = entry
         if entry["code"] not in code_grouped:
             code_grouped[entry["code"]] = []
         code_grouped[entry["code"]].append(entry)
@@ -37,6 +37,6 @@ with open("database/timeline.csv") as file:
                 code_grouped[entry["code2"]] = []
             code_grouped[entry["code2"]].append(entry)
         if prev != "":
-            previous_year[entry["year"]] = prev
-            next_year[prev] = entry["year"]
-        prev = entry["year"]
+            previous_month[entry["month"]] = prev
+            next_month[prev] = entry["month"]
+        prev = entry["month"]

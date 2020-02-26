@@ -5,7 +5,7 @@ if(isset($_POST['search_submit'])) {
 	if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 	$result = $conn->query("SELECT * FROM estudiante WHERE name LIKE '".($conn->real_escape_string($_GET['search_name']))."'");
 	while($student = $result->fetch_assoc()) {
-		
+
 	}
 	$conn->close();
 }
@@ -56,18 +56,18 @@ if(isset($_POST['search_submit'])) {
 		if($search_query != "") {
 			echo "<script>document.getElementById('search_name').value = '".$search_query."'</script>";
 			echo '<h3>Search results for: '.$search_query.'</h3>';
-			echo '<table><thead><tr><th>Participant</th><th>Year</th><th>Country</th><th>Award</th></tr></thead><tbody>';
+			echo '<table><thead><tr><th>Participant</th><th>Month</th><th>Country</th><th>Award</th></tr></thead><tbody>';
 			$result = $conn->query("SELECT * FROM countries");
 			$countries = array();
 			while($row = $result->fetch_assoc()) {
 				$countries[$row['code']] = $row['name'];
 			}
 			if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-			$result = $conn->query("SELECT * FROM estudiante WHERE name LIKE '%".$search_query."%' AND year >= ".$from." AND year <= ".$to." LIMIT 100");
+			$result = $conn->query("SELECT * FROM estudiante WHERE name LIKE '%".$search_query."%' AND month >= ".$from." AND month <= ".$to." LIMIT 100");
 			while($student = $result->fetch_assoc()) {
 				echo '<tr>';
 				echo '<td>'.$student['name'].'</td>';
-				echo '<td><a href="year_info.php?year='.$student['year'].'">'.$student['year'].'</a></td>';
+				echo '<td><a href="month_info.php?month='.$student['month'].'">'.$student['month'].'</a></td>';
 				echo '<td><a href="country_info.php?code='.$student['country'].'">'.$countries[$student['country']].'</a></td><td>';
 				switch($student['medal']) {
 					case 1: echo '<img src="m_gold.png" width="9" height="9"> Gold Medal'; break;

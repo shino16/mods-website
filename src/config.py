@@ -3,8 +3,8 @@
 webmaster_email = "iphounofficial@gmail.com"
 
 # Technically, these can be non-consecutive
-previous_year = "2019"
-next_year = "2020"
+previous_month = "Jan.2020"
+next_month = "Feb.2020"
 
 # On github, the links don't have to have .html prefix,
 #   and directories forward to index.html inside.

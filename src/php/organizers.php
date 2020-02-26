@@ -2,11 +2,11 @@
 header('Content-Type: text/html; charset=UTF-8');
 $conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-$sql = "SELECT * FROM organizers ORDER BY year DESC";
+$sql = "SELECT * FROM organizers ORDER BY month DESC";
 $result = $conn->query($sql);
-$years=array();
+$months=array();
 while($row = $result->fetch_assoc()){
-	$years[]=$row;
+	$months[]=$row;
 }
 $sql = "SELECT * FROM countries";
 $result = $conn->query($sql);
@@ -34,7 +34,7 @@ $conn->close();
 	<thead>
 	<tr>
 	<th>#</th>
-	<th class="highlightDown">Year</th>
+	<th class="highlightDown">Month</th>
 	<th>Country</th>
 	<th>City</th>
 	<th>Date</th>
@@ -43,15 +43,15 @@ $conn->close();
 	</thead>
 	<tbody>
 	<?
-	for($i=0;$i<count($years);$i++){
+	for($i=0;$i<count($months);$i++){
 		echo '<tr>
-		<td align="right"><a href="year_info.php?year='.$years[$i]['year'].'">'.$years[$i]['number'].'</a></td>
-		<td align="center"><a href="year_info.php?year='.$years[$i]['year'].'">'.$years[$i]['year'].'</a></td>
-		<td><a href="country_info.php?code='.$years[$i]['country'].'">'.$countries[$years[$i]['country']].'</a></td>
-		<td>'.($years[$i]['city'] ? $years[$i]['city'] : "").'</td>
-		<td align="center">'.($years[$i]['date'] ? $years[$i]['date'] : "").'</td>
-		<td align="center">'.($years[$i]['participatingcountries'] ? $years[$i]['participatingcountries'] : "").'</td>
-		<td align="right">'.($years[$i]['contestants'] ? $years[$i]['contestants'] : "").'</td>
+		<td align="right"><a href="month_info.php?month='.$months[$i]['month'].'">'.$months[$i]['number'].'</a></td>
+		<td align="center"><a href="month_info.php?month='.$months[$i]['month'].'">'.$months[$i]['month'].'</a></td>
+		<td><a href="country_info.php?code='.$months[$i]['country'].'">'.$countries[$months[$i]['country']].'</a></td>
+		<td>'.($months[$i]['city'] ? $months[$i]['city'] : "").'</td>
+		<td align="center">'.($months[$i]['date'] ? $months[$i]['date'] : "").'</td>
+		<td align="center">'.($months[$i]['participatingcountries'] ? $months[$i]['participatingcountries'] : "").'</td>
+		<td align="right">'.($months[$i]['contestants'] ? $months[$i]['contestants'] : "").'</td>
 		</tr>';
 	}
 	?>

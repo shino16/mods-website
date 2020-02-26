@@ -4,14 +4,14 @@ from database_countries import code_to_country as c_t_c
 
 database = []
 code_grouped = {}
-year_grouped = {}
+month_grouped = {}
 
 with open("database/estudiantes.csv", encoding="utf8") as file:
     reader = csv.reader(file)
     for row in reader:
         assert len(row) == 9, "Student row error: {}".format(row)
         entry = {
-            "year": row[0],
+            "month": row[0],
             "rank": row[1],
             "name": row[2],
             "code": row[3],
@@ -29,6 +29,6 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
         if entry["code"] not in code_grouped:
             code_grouped[entry["code"]] = []
         code_grouped[entry["code"]].append(entry)
-        if entry["year"] not in year_grouped:
-            year_grouped[entry["year"]] = []
-        year_grouped[entry["year"]].append(entry)
+        if entry["month"] not in month_grouped:
+            month_grouped[entry["month"]] = []
+        month_grouped[entry["month"]].append(entry)

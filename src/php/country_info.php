@@ -5,7 +5,7 @@ $conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 $result = $conn->query("SELECT * FROM countries WHERE code='".($conn->real_escape_string($_GET['code']))."'");
 if($country = $result->fetch_assoc()) {
-	$result2 = $conn->query("SELECT * FROM estudiante WHERE country='".$country['code']."' ORDER BY year DESC");
+	$result2 = $conn->query("SELECT * FROM estudiante WHERE country='".$country['code']."' ORDER BY month DESC");
 	$gold = 0;
 	$silver = 0;
 	$bronze = 0;
@@ -19,9 +19,9 @@ if($country = $result->fetch_assoc()) {
 			case 3: $bronze++; break;
 			case 4: $honourable++; break;
 		}
-		if($firstparticipation != $row['year']) {
+		if($firstparticipation != $row['month']) {
 			$participation++;
-			$firstparticipation = $row['year'];
+			$firstparticipation = $row['month'];
 		}
 	}
 	$nextcountry = $conn->query("SELECT * FROM countries WHERE name>'".$country['name']."' ORDER BY name LIMIT 1")->fetch_assoc();
@@ -49,7 +49,7 @@ $conn->close();
 	</div>
 	<h2>
 	<? if($previouscountry) echo '<a href="country_info.php?code='.$previouscountry['code'].'" class="pointer">&#9668;</a> '; ?>
-	<a href="country_info.php?code=<? echo $country['code']; ?>" class="highlight"><? echo $country['name']; ?></a>  
+	<a href="country_info.php?code=<? echo $country['code']; ?>" class="highlight"><? echo $country['name']; ?></a>
 	<? if($nextcountry) echo '<a href="country_info.php?code='.$nextcountry['code'].'" class="pointer">&#9658;</a>'; ?></h2>
 	<h3 class="hideprn">
 	<!-- a id="ctl00_CPH_Main_HyperLinkTeam" href="#">Team results</a> &bull; -->
@@ -60,13 +60,13 @@ $conn->close();
 	<?
 	if($country['nationalsite']!="") echo '<dt>Contact</dt><dd>National PhO site: <a href="'.$country['nationalsite'].'">'.$country['nationalsite'].'</a></dd>';
 	$conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
-	$result = $conn->query("SELECT * FROM organizers WHERE country='".$country['code']."' ORDER BY year");
+	$result = $conn->query("SELECT * FROM organizers WHERE country='".$country['code']."' ORDER BY month");
 	$flag = True;
 	while($result && $row = $result->fetch_assoc()) {
 		if($flag) echo "<dt>IPhO Host</dt>";
-		echo '<dd><a href="year_info.php?year='.$row['year'].'">'.$row['year'].'</a>';
+		echo '<dd><a href="month_info.php?month='.$row['month'].'">'.$row['month'].'</a>';
 		if($row['city']) echo ' - '.$row['city'];
-		if($row['homepage']) echo ' (<a href='.$row['homepage'].' target="_blank">Home Page IPhO '.$row['year'].'</a>)';
+		if($row['homepage']) echo ' (<a href='.$row['homepage'].' target="_blank">Home Page IPhO '.$row['month'].'</a>)';
 		echo '</dd>';
 		$flag = False;
 	}

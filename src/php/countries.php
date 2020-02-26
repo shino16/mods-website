@@ -31,12 +31,12 @@
 		<td align="center"><a href="country_info.php?code='.$row['code'].'">'.$row['code'].'</a></td>
 		<td><a href="country_info.php?code='.$row['code'].'">'.$row['name'].'</a></td>';
 		echo '<td>'.($row['nationalsite']==''?'':'<a href="'.$row['nationalsite'].'" target="_blank">'.(strlen($row['nationalsite'])<50?$row['nationalsite']:substr($row['nationalsite'],0,50)."...").'</a>').'</td>';
-		$result2 = $conn->query("SELECT * FROM organizers WHERE country='".$row['code']."' ORDER BY year");
+		$result2 = $conn->query("SELECT * FROM organizers WHERE country='".$row['code']."' ORDER BY month");
 		echo '<td>';
 		$flag=False;
 		while($row2 = $result2->fetch_assoc()) {
 			if($flag) echo ", ";
-			echo '<a href="year_info.php?year='.$row2['year'].'">'.$row2['year'].'</a>';
+			echo '<a href="month_info.php?month='.$row2['month'].'">'.$row2['month'].'</a>';
 			$flag=True;
 		}
 		echo '</td></tr>';
@@ -45,7 +45,7 @@
 	?>
 	</tbody>
 	</table>
-	
+
 </div>
 <? include 'footer.php'; ?>
 </body>

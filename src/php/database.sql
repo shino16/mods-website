@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   `userid` int(11) NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `country` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `year` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
   `medal` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
 -- Dumping data for table `estudiante`
 --
 
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (1, 1, 'Taehyoung Kim', 'KOR', 2015, 1, 1),
 (2, 2, 'Jingyu Zhao', 'CHN', 2015, 2, 1),
 (3, 3, 'Deng Pan', 'CHN', 2015, 3, 1),
@@ -1193,7 +1193,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (1132, 0, 'Svilen Bidikov', 'BGR', 1969, 35, 4),
 (1133, 0, 'Feliks Przytycki', 'POL', 1969, 36, 4),
 (1134, 0, 'Victor Birman', 'ROU', 1969, 37, 4);
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (1135, 0, 'Mikhail Voloshin', 'USS', 1970, 1, 1),
 (1136, 0, 'Sergey Gorbachevskiy', 'USS', 1970, 2, 1),
 (1137, 0, 'Borys Petrov', 'USS', 1970, 3, 1),
@@ -2227,7 +2227,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (2165, 0, 'Banaszek Konrad', 'POL', 1992, 17, 2),
 (2166, 0, 'Smye Graham', 'UNK', 1992, 18, 2),
 (2167, 0, 'Fagan Matthew', 'AUS', 1992, 19, 2);
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (2168, 0, 'Chris Stolk', 'NLD', 1992, 20, 2),
 (2169, 0, 'Filip MÃ¼nz', 'CZS', 1992, 21, 2),
 (2170, 0, 'Wagenaar Daniel', 'NLD', 1992, 22, 2),
@@ -3265,7 +3265,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (3202, 0, 'Islam Bedirov', 'AZE', 1999, 197, 4),
 (3203, 0, 'Tawan Sinchai', 'THA', 1999, 198, 4),
 (3204, 0, 'Tom Brouwers', 'BEL', 1999, 199, 4);
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (3205, 0, 'Altankhuyag Bilguun', 'MNG', 1999, 200, 4),
 (3206, 0, 'Juraj Suchar', 'SVK', 1999, 201, 4),
 (3207, 0, 'Pekka Rainvuori', 'FIN', 1999, 202, 4),
@@ -4285,7 +4285,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (4221, 0, 'Sultan Imenov', 'KGZ', 2005, 140, 4),
 (4222, 0, 'Marcin Grzybowski', 'POL', 2005, 141, 4),
 (4223, 0, 'Daniel Bozik', 'SVK', 2005, 142, 4);
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (4224, 0, 'Stefano Attanasio', 'ITA', 2005, 143, 4),
 (4225, 0, 'Jan Lalinsky', 'SVK', 2005, 144, 4),
 (4226, 0, 'Timothy Lee', 'UNK', 2005, 145, 4),
@@ -5290,7 +5290,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (5225, 0, 'Reza Javadinezhad', 'IRN', 2009, 192, 4),
 (5226, 0, 'Emilis Pileckis', 'LTU', 2009, 193, 4),
 (5227, 0, 'Kristinn Kristinsson', 'ISL', 2009, 194, 4);
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (5228, 0, 'Algirdas Baskys', 'LTU', 2009, 195, 4),
 (5229, 0, 'Kristian Laakkonen', 'FIN', 2009, 196, 4),
 (5230, 0, 'Ants Remm', 'EST', 2009, 197, 4),
@@ -6278,7 +6278,7 @@ INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `me
 (6617, 0, 'Emma Silberbrandt', 'DEN', 2014, 326, 5),
 (6618, 0, 'Giovanni Ricardo Gando Vasquez', 'ECU', 2014, 327, 5),
 (6619, 0, 'Georgios Mendrinos', 'HEL', 2014, 328, 5);
-INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `year`, `rank`, `medal`) VALUES
+INSERT INTO `estudiante` (`id`, `userid`, `name`, `country`, `month`, `rank`, `medal`) VALUES
 (6620, 0, 'Hringur Sigurdarson', 'ISL', 2014, 329, 5),
 (6621, 0, 'Mario Fernando Alvarado Lazo', 'SLV', 2014, 330, 5),
 (6622, 0, 'Tryggvi Unnsteinsson', 'ISL', 2014, 331, 5),
@@ -6391,7 +6391,7 @@ CREATE TABLE IF NOT EXISTS `organizers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `number` int(11) NOT NULL,
   `country` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
-  `year` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
   `city` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `homepage` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `participatingcountries` int(11) NOT NULL,
@@ -6408,7 +6408,7 @@ CREATE TABLE IF NOT EXISTS `organizers` (
 -- Dumping data for table `organizers`
 --
 
-INSERT INTO `organizers` (`id`, `number`, `country`, `year`, `city`, `homepage`, `participatingcountries`, `contestants`, `date`, `gold`, `silver`, `bronze`, `honourable`) VALUES
+INSERT INTO `organizers` (`id`, `number`, `country`, `month`, `city`, `homepage`, `participatingcountries`, `contestants`, `date`, `gold`, `silver`, `bronze`, `honourable`) VALUES
 (1, 46, 'IND', 2015, 'Mumbai', 'http://www.ipho2015.in/', 83, 382, '5.7 - 12.7', 38, 64, 93, 68),
 (2, 45, 'KAZ', 2014, 'Astana', 'http://ipho2014.kz/', 86, 383, '13.7 - 21.7', 44, 82, 86, 63),
 (3, 44, 'DEN', 2013, 'Copenhagen', 'http://ipho2013.dk/', 82, 374, '7.7 - 15.7', 41, 64, 101, 64),

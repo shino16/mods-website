@@ -16,9 +16,9 @@ def run():
     create("country_info")
     create("organizers")
     create("search")
-    create("year_country")
-    create("year_individual")
-    create("year_info")
-    
+    create("month_country")
+    create("month_individual")
+    create("month_info")
+
 if __name__ == "__main__":
     run()

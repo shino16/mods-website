@@ -4,23 +4,23 @@ if(isset($_POST['iphosubmit'])){
 	$conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
-	} 
-	$sql = "INSERT INTO estudiante (name, country, year, rank, medal)
-	VALUES ('".$_POST['iphoname']."','".$_POST['iphocode']."','".$_POST['iphoyear']."',' ".$_POST['iphorank']."',' ".$_POST['iphomedal']."')";
-	
+	}
+	$sql = "INSERT INTO estudiante (name, country, month, rank, medal)
+	VALUES ('".$_POST['iphoname']."','".$_POST['iphocode']."','".$_POST['iphomonth']."',' ".$_POST['iphorank']."',' ".$_POST['iphomedal']."')";
+
 	if ($conn->query($sql) === TRUE) {
 		echo "New record created successfully";
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
-	
+
 	$conn->close();
 }else if(isset($_POST['json'])){
 	$conn = new mysqli("localhost", "iphouser", "ornitorenk17", "ipho");
 	$bebeler=json_decode($_POST['json'],true);
 	for($i=0;$i<count($bebeler);$i++){
-		$sql = "INSERT INTO estudiante (name, country, year, rank, medal)
-		VALUES ('".$bebeler[$i]['name']."','".$bebeler[$i]['code']."','".$bebeler[$i]['year']."','".$bebeler[$i]['rank']."','".$bebeler[$i]['medal']."')";
+		$sql = "INSERT INTO estudiante (name, country, month, rank, medal)
+		VALUES ('".$bebeler[$i]['name']."','".$bebeler[$i]['code']."','".$bebeler[$i]['month']."','".$bebeler[$i]['rank']."','".$bebeler[$i]['medal']."')";
 		$conn->query($sql);
 	}
 	$conn->close();
@@ -33,7 +33,7 @@ if(isset($_POST['iphosubmit'])){
 	<div id="resp"></div><br><br>
 	name:<input type="text" id="iphoname"><br>
 	country:<input type="text" id="iphocode"><br>
-	iphoyear:<input type="text" id="iphoyear"><br>
+	iphomonth:<input type="text" id="iphomonth"><br>
 	iphorank:<input type="text" id="iphorank"><br>
 	iphomedal:<input type="text" id="iphomedal"><br>
 	id<input type="text" id="iphoid" value="-1"><br>
@@ -61,7 +61,7 @@ if(isset($_POST['iphosubmit'])){
 		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		xmlhttp.send("iphoname="+iphoname.value
 			+"&iphocode="+iphocode.value
-			+"&iphoyear="+iphoyear.value
+			+"&iphomonth="+iphomonth.value
 			+"&iphorank="+iphorank.value
 			+"&iphomedal="+iphomedal.value
 			+"&iphosubmit=17");
@@ -93,7 +93,7 @@ if(isset($_POST['iphosubmit'])){
 	}
 	texttolist=function(){
 		var lines = bebetexttext.value.split("\n");
-		var year = lines[0];
+		var month = lines[0];
 		var medal = 1;
 		var kekolar = [];
 		var rank = 1;
@@ -107,7 +107,7 @@ if(isset($_POST['iphosubmit'])){
 			if(line[0] == "Special") continue;
 			if(line[0] == "Absolute") continue;
 			var keko = {};
-			keko.year = year;
+			keko.month = month;
 			keko.medal = medal;
 			keko.rank = rank++;
 			keko.code = "";

@@ -36,16 +36,16 @@ do
     hosts=""
     flag=0
     # as inefficient as possible
-    while IFS=, read number year date _code city website p_country p_student gold silver bronze honourable newline
-    do 
+    while IFS=, read number month date _code city website p_country p_student gold silver bronze honourable newline
+    do
         if [ $code == $_code ]
         then
             if [ $flag != 0 ]
             then
                 hosts=$hosts", "
             fi
-            temp="$(cat templates/countries/index_year.html)"
-            temp="${temp//__YEAR__/$year}"
+            temp="$(cat templates/countries/index_month.html)"
+            temp="${temp//__MONTH__/$month}"
             hosts=$hosts$temp
             ((flag++))
         fi

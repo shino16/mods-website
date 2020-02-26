@@ -1,8 +1,8 @@
 #!/bin/bash
 # arguments:
-# $1: year of IPhO to be created
-# $2: previous year if exists, 0 otherwise
-# $3: next year if exists, 0 otherwise
+# $1: month of IPhO to be created
+# $2: previous month if exists, 0 otherwise
+# $3: next month if exists, 0 otherwise
 # $4: number of IPhO to be created
 echo "Creating timeline/$1/individual"
 # imports
@@ -11,39 +11,39 @@ source ordinals.sh
 source header_side.sh 1
 source footer.sh
 # load file and replace basics
-html="$(cat templates/timeline/year/individual.html)"
+html="$(cat templates/timeline/month/individual.html)"
 html="${html//__HEADER_SIDE__/$header_side}"
 html="${html//__FOOTER__/$footer}"
-# Replacing year information
+# Replacing month information
 html="${html//__NUMBER__/$4}"
 html="${html//__ORDINAL__/${ordinals[$4]}}"
-html="${html//__YEAR__/$1}"
+html="${html//__MONTH__/$1}"
 if [ $2 != 0 ]
 then
-    previous_year_html="$(cat templates/timeline/year/individual_previous_year.html)"
-    previous_year_html="${previous_year_html//__PREVIOUS_YEAR__/$2}"
-    html="${html//__PREVIOUS_YEAR__/$previous_year_html}"
+    previous_month_html="$(cat templates/timeline/month/individual_previous_month.html)"
+    previous_month_html="${previous_month_html//__PREVIOUS_MONTH__/$2}"
+    html="${html//__PREVIOUS_MONTH__/$previous_month_html}"
 else
-    html="${html//__PREVIOUS_YEAR__/}"
+    html="${html//__PREVIOUS_MONTH__/}"
 fi
 if [ $3 != 0 ]
 then
-    next_year_html="$(cat templates/timeline/year/individual_next_year.html)"
-    next_year_html="${next_year_html//__NEXT_YEAR__/$3}"
-    html="${html//__NEXT_YEAR__/$next_year_html}"
+    next_month_html="$(cat templates/timeline/month/individual_next_month.html)"
+    next_month_html="${next_month_html//__NEXT_MONTH__/$3}"
+    html="${html//__NEXT_MONTH__/$next_month_html}"
 else
-    html="${html//__NEXT_YEAR__/}"
+    html="${html//__NEXT_MONTH__/}"
 fi
 # Creating table
 table=""
-rowt="$(cat templates/timeline/year/individual_row.html)"
-gold="$(cat templates/timeline/year/individual_gold.html)"
-silver="$(cat templates/timeline/year/individual_silver.html)"
-bronze="$(cat templates/timeline/year/individual_bronze.html)"
-honourable="$(cat templates/timeline/year/individual_honourable.html)"
-while IFS=, read name code year rank medal newline
-do 
-    if [ $1 == $year ]
+rowt="$(cat templates/timeline/month/individual_row.html)"
+gold="$(cat templates/timeline/month/individual_gold.html)"
+silver="$(cat templates/timeline/month/individual_silver.html)"
+bronze="$(cat templates/timeline/month/individual_bronze.html)"
+honourable="$(cat templates/timeline/month/individual_honourable.html)"
+while IFS=, read name code month rank medal newline
+do
+    if [ $1 == $month ]
     then
         row="$rowt"
         row="${row//__NAME__/$name}"
