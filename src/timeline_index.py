@@ -9,9 +9,8 @@ def run():
     print("Creating timeline/index")
     html = templates.get("timeline/index")
     html = templates.initial_replace(html, 1)
-    
+
     tablehtml = ""
-    upcominghtml = ""
     for row in t_db:
         rowhtml = templates.get("timeline/index_row")
         rowhtml = rowhtml.replace("__NUMBER__", row["number"])
@@ -29,16 +28,11 @@ def run():
         else:
             rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
             rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
-        if int(row["year"]) <= int(config.next_year) + 2:
-            # Reverse list
-            tablehtml = rowhtml + tablehtml
-        else:
-            upcominghtml = rowhtml + upcominghtml
+        tablehtml = rowhtml + tablehtml
     html = html.replace("__TABLE__", tablehtml)
-    html = html.replace("__UPCOMING__", upcominghtml)
-    
+
     html = templates.final_replace(html, "..")
     util.writefile("../timeline/index.html", html)
-    
+
 if __name__ == "__main__":
     run()
