@@ -9,13 +9,13 @@ month_grouped = {}
 with open("database/estudiantes.csv", encoding="utf8") as file:
     reader = csv.reader(file)
     for row in reader:
-        assert len(row) == 8, "Student row error: {}".format(row)
+        assert len(row) == 5, "Student row error: {}".format(row)
         entry = {
             "month": row[0],
             "rank": row[1],
             "name": row[2],
             "medal": row[3],
-            "website": row[7],
+            "website": row[4],
             "rank>=": False
         }
         if entry["medal"] not in ["G", "S", "B", "H", "P"]:
