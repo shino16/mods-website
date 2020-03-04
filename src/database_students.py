@@ -4,6 +4,7 @@ from database_countries import code_to_country as c_t_c
 
 database = []
 contestant_grouped = {}
+contestant_histories = {}
 month_grouped = {}
 
 with open("database/estudiantes.csv", encoding="utf8") as file:
@@ -30,3 +31,14 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
         if entry["month"] not in month_grouped:
             month_grouped[entry["month"]] = []
         month_grouped[entry["month"]].append(entry)
+
+    for contestant, entries in contestant_grouped.items():
+        contestant_histories[contestant] = {
+            "G": 0,
+            "S": 0,
+            "B": 0,
+            "H": 0,
+            "P": 0
+        }
+        for entry in entries:
+            contestant_histories[contestant][entry["medal"]] += 1
