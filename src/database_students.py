@@ -4,7 +4,7 @@ from database_countries import code_to_country as c_t_c
 
 database = []
 contestant_grouped = {}
-contestant_histories = {}
+contestant_history = {}
 month_grouped = {}
 
 with open("database/estudiantes.csv", encoding="utf8") as file:
@@ -33,7 +33,7 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
         month_grouped[entry["month"]].append(entry)
 
     for contestant, entries in contestant_grouped.items():
-        contestant_histories[contestant] = {
+        contestant_history[contestant] = {
             "G": 0,
             "S": 0,
             "B": 0,
@@ -41,4 +41,4 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
             "P": 0
         }
         for entry in entries:
-            contestant_histories[contestant][entry["medal"]] += 1
+            contestant_history[contestant][entry["medal"]] += 1

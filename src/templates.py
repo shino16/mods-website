@@ -42,7 +42,7 @@ def final_replace(html, root):
     """
     html = html.replace("__ROOT__", root)
     if config.github:
-        html = html.replace("__INDEX__", ".")
+        html = html.replace("__INDEX__", "")
         html = html.replace("__HTML_EXT__", "")
     else:
         html = html.replace("__INDEX__", "index.html")
