@@ -56,7 +56,7 @@
         }
         xmlhttp.send();
     }
-    window.ipho_search = function() {
+    window.mods_search = function() {
         if(countries == null || students == null) {
           return;
         }
