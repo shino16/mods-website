@@ -1,11 +1,10 @@
 #!/usr/bin/python
-import subprocess
+from distutils.dir_util import copy_tree
 
 def run():
     print("Copying static files")
-    # shutils pls no :(
-    subprocess.Popen("cp -r ./templates/img ../", shell=True)
-    subprocess.Popen("cp -r ./templates/css ../", shell=True)
+    copy_tree("./templates/img",  "../img")
+    copy_tree("./templates/css",  "../css")
 
 if __name__ == "__main__":
     run()
