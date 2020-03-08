@@ -47,5 +47,5 @@ def final_replace(html, root):
     else:
         html = html.replace("__INDEX__", "index.html")
         html = html.replace("__HTML_EXT__", ".html")
-    html = html.replace("__WEBMASTER__", config.webmaster_email)
+    html = html.replace("__EMAIL__", config.email)
     return html

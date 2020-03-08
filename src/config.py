@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-webmaster_email = "iphounofficial@gmail.com"
+email = "mo.discord.server@gmail.com"
 
 # Technically, these can be non-consecutive
 previous_month = "Jan.2020"
