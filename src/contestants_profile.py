@@ -19,7 +19,7 @@ def run(name):
             .replace("__HONOURABLE_MENTION__", str(history["H"])) \
             .replace("__PARTICIPATIONS__", str(sum(history.values())))
 
-    beg, inter, adv, special = [""] * 4
+    beg, inter, adv, modsmo, special = [""] * 5
     for row in contestant_grouped[name]:
         rowhtml = templates.get("contestants/profile_row") \
                     .replace("__MONTH__", row["month"]) \
@@ -41,12 +41,15 @@ def run(name):
             inter += rowhtml
         elif row["contest_name"] == "Advanced":
             adv += rowhtml
+        elif row["contest_name"] == "MODSMO":
+            modsmo += rowhtml
         else:
             special += rowhtml
 
     html = html.replace("__TABLE_BEG__", beg) \
             .replace("__TABLE_INT__", inter) \
             .replace("__TABLE_ADV__", adv) \
+            .replace("__TABLE_MODSMO__", modsmo) \
             .replace("__TABLE_SPECIAL__", special)
     html = templates.final_replace(html, "../..")
     util.writefile(path.normpath("../contestants/" + name + "/index.html"), html)

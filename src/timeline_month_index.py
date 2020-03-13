@@ -14,6 +14,7 @@ def run(month):
     html = templates.initial_replace(html, 1)
     monthdata = t_db_m[month]
     html = html.replace("__MONTH__", month)
+    html = html.replace("__CONTEST_NAME__", monthdata["name"])
     html = html.replace("__NUMBER__", monthdata["number"])
     html = html.replace("__ORDINAL__", util.ordinal(monthdata["number"]))
     html = html.replace("__DATE__", monthdata["date"])
