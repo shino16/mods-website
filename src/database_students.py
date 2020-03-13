@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import csv
 from database_countries import code_to_country as c_t_c
+from database_timeline import month_indexed
 
 database = []
 contestant_grouped = {}
@@ -15,6 +16,7 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
             "month": row[0],
             "rank": row[1],
             "name": row[2],
+            "contest_name": month_indexed[row[0]]["name"],
             "medal": row[3],
             "website": row[4],
             "rank>=": False
@@ -41,4 +43,5 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
             "P": 0
         }
         for entry in entries:
-            contestant_history[contestant][entry["medal"]] += 1
+            if entry["contest_name"] not in {"Beginner", "Intermediate"}:
+                contestant_history[contestant][entry["medal"]] += 1

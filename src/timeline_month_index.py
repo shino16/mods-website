@@ -39,12 +39,6 @@ def run(month):
     else:
         html = html.replace("__P_STUDENT_STYLE__", "display: none;")
 
-    if monthdata["p_country"] != "":
-        html = html.replace("__P_COUNTRY_STYLE__", "")
-        html = html.replace("__P_COUNTRY__", monthdata["p_country"])
-    else:
-        html = html.replace("__P_COUNTRY_STYLE__", "display: none;")
-
     if monthdata["homepage"] != "":
         html = html.replace("__HOMEPAGE_STYLE__", "")
         html = html.replace("__HOMEPAGE__", monthdata["homepage"])
