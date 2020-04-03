@@ -11,18 +11,17 @@ month_grouped = {}
 with open("database/estudiantes.csv", encoding="utf8") as file:
     reader = csv.reader(file)
     for row in reader:
-        assert len(row) == 5, "Student row error: {}".format(row)
+        assert len(row) == 6, "Student row error: {}".format(row)
         entry = {
             "month": row[0],
             "rank": row[1],
-            "name": row[2],
+            "score": row[2],
+            "name": row[3],
             "contest_name": month_indexed[row[0]]["name"],
-            "medal": row[3],
-            "website": row[4],
+            "medal": row[4],
+            "website": row[5],
             "rank>=": False
         }
-        if entry["medal"] not in ["G", "S", "B", "H", "P"]:
-            raise Exception("Student database corrupted! Row: {}".format(row))
         if entry["rank"][:2] == ">=":
             entry["rank"] = entry["rank"][2:]
             entry["rank>="] = True
@@ -43,5 +42,4 @@ with open("database/estudiantes.csv", encoding="utf8") as file:
             "P": 0
         }
         for entry in entries:
-            if entry["contest_name"] not in {"Beginner", "Intermediate"}:
-                contestant_history[contestant][entry["medal"]] += 1
+            contestant_history[contestant][entry["medal"] or "P"] += 1
