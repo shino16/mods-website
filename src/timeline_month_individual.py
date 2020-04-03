@@ -45,6 +45,7 @@ def run(month):
                 rowhtml = rowhtml.replace("__NAME__", row["name"])
             rowhtml = rowhtml.replace("__NAME_NORM__", row["name"].replace("#", "%23"))
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row["rank>="] else "") + row["rank"])
+            rowhtml = rowhtml.replace("__SCORE__", row["score"])
             if row["medal"] == "G":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/month/individual_gold"))
             elif row["medal"] == "S":
