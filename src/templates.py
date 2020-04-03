@@ -28,9 +28,9 @@ def initial_replace(html, type):
         side = side.replace("__HIGHLIGHT_3__", "")
         html = html.replace("__HEADER_SIDE__", side)
     html = html.replace("__HEADER_PREVIOUS_MONTH__", config.previous_month)
-    html = html.replace("__HEADER_PREVIOUS_MONTH_HOMEPAGE__", t_db_m[config.previous_month]["homepage"])
+    # html = html.replace("__HEADER_PREVIOUS_MONTH_HOMEPAGE__", t_db_m[config.previous_month]["homepage"])
     html = html.replace("__HEADER_NEXT_MONTH__", config.next_month)
-    html = html.replace("__HEADER_NEXT_MONTH_HOMEPAGE__", t_db_m[config.next_month]["homepage"])
+    # html = html.replace("__HEADER_NEXT_MONTH_HOMEPAGE__", t_db_m[config.next_month]["homepage"])
     html = html.replace("__FOOTER__", get("footer"))
     return html
 
