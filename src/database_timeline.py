@@ -7,7 +7,7 @@ previous_month = {}
 diff_indexed = {}
 next_month = {}
 
-with open("database/timeline.csv") as file:
+with open("../database/timeline.csv") as file:
     reader = csv.reader(file)
     prev = ""
     for i, row in enumerate(reader):
