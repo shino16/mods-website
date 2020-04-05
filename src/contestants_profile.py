@@ -53,7 +53,7 @@ def run(user_id):
             .replace("__TABLE_MODSMO__", modsmo) \
             .replace("__TABLE_SPECIAL__", special)
     html = templates.final_replace(html, "../..")
-    util.writefile(path.normpath("../contestants/" + user_id + "/index.html"), html)
+    util.writefile("../dist/contestants/" + user_id + "/index.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])

@@ -2,7 +2,6 @@
 import sys
 import util
 import templates
-from database_countries import code_to_country
 from database_students import month_grouped as s_db_y
 from database_timeline import month_indexed as t_db_m
 from database_timeline import previous_month
@@ -81,7 +80,7 @@ def run(month):
     html = html.replace("__TABLE__", tablehtml)
 
     html = templates.final_replace(html, "../..")
-    util.writefile("../timeline/" + month + "/country.html", html)
+    util.writefile("../dist/timeline/" + month + "/country.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])

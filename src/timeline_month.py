@@ -7,9 +7,8 @@ import timeline_month_individual
 
 def run(month):
     print("Creating timeline/" + month)
-    util.makedirs("../timeline/" + month)
+    util.makedirs("../dist/timeline/" + month)
     timeline_month_index.run(month)
-    timeline_month_country.run(month)
     timeline_month_individual.run(month)
 
 if __name__ == "__main__":

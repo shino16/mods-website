@@ -1,6 +1,5 @@
 #!/usr/bin/python
 import csv
-from database_countries import code_to_country as c_t_c
 from database_timeline import month_indexed
 
 database = []
