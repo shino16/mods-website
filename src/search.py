@@ -4,7 +4,7 @@ import templates
 
 def run():
     print("Creating search")
-    util.makedirs("../search")
+    util.makedirs("../dist/search")
     util.copyfile("database/estudiantes.csv", "../dist/search/estudiantes.csv")
     util.copyfile("templates/search/search.js", "../dist/search/search.js")
     util.copyfile("templates/search/asciify.js", "../dist/search/asciify.js")
