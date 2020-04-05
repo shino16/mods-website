@@ -7,12 +7,12 @@ from database_timeline import month_indexed as timeline
 from database_students import contestant_history
 from database_students import contestant_grouped
 
-def run(name):
-    print("Creating contestants/" + name + "/index")
-    history = contestant_history[name]
+def run(user_id):
+    print("Creating contestants/" + user_id + "/index")
+    history = contestant_history[user_id]
     html = templates.get("contestants/profile")
     html = templates.initial_replace(html, 2) \
-            .replace("__NAME__", name) \
+            .replace("__NAME__", contestant_grouped[user_id][0]["name"]) \
             .replace("__GOLD__", str(history["G"])) \
             .replace("__SILVER__", str(history["S"])) \
             .replace("__BRONZE__", str(history["B"])) \
@@ -20,7 +20,7 @@ def run(name):
             .replace("__PARTICIPATIONS__", str(sum(history.values())))
 
     beg, inter, adv, modsmo, special = [""] * 5
-    for row in contestant_grouped[name]:
+    for row in contestant_grouped[user_id]:
         rowhtml = templates.get("contestants/profile_row") \
                     .replace("__MONTH__", row["month"]) \
                     .replace("__CONTEST_NAME__", row["contest_name"]) \
@@ -53,7 +53,7 @@ def run(name):
             .replace("__TABLE_MODSMO__", modsmo) \
             .replace("__TABLE_SPECIAL__", special)
     html = templates.final_replace(html, "../..")
-    util.writefile(path.normpath("../contestants/" + name + "/index.html"), html)
+    util.writefile(path.normpath("../contestants/" + user_id + "/index.html"), html)
 
 if __name__ == "__main__":
     run(sys.argv[1])
