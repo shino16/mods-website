@@ -7,7 +7,7 @@ contestant_grouped = {}
 contestant_history = {}
 month_grouped = {}
 
-with open("database/estudiantes.csv", encoding="utf8") as file:
+with open("../database/estudiantes.csv", encoding="utf8") as file:
     reader = csv.reader(file)
     for row in reader:
         assert len(row) == 6, "Student row error: {}".format(row)
