@@ -2,7 +2,6 @@
 import config
 import templates
 import util
-from database_countries import code_to_country
 from database_timeline import database as t_db
 
 def run():
@@ -18,18 +17,11 @@ def run():
         rowhtml = rowhtml.replace("__CONTEST_NAME__", row["name"])
         rowhtml = rowhtml.replace("__DATE__", row["date"])
         rowhtml = rowhtml.replace("__P_STUDENT__", row["p_student"])
-        if "code2" in row:
-            rowhtml = rowhtml.replace("__CODE2__", row["code2"])
-            rowhtml = rowhtml.replace("__COUNTRY2__", code_to_country[row["code2"]])
-            rowhtml = rowhtml.replace("__CODE2_STYLE__", "")
-        else:
-            rowhtml = rowhtml.replace("__CODE2_STYLE__", "display: none;")
-            rowhtml = rowhtml.replace("__CODE2__", ".") # Google crawler fix
         tablehtml = rowhtml + tablehtml
     html = html.replace("__TABLE__", tablehtml)
 
     html = templates.final_replace(html, "..")
-    util.writefile("../timeline/index.html", html)
+    util.writefile("../dist/timeline/index.html", html)
 
 if __name__ == "__main__":
     run()
