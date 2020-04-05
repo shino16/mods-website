@@ -47,11 +47,18 @@ def run(name):
         else:
             special += rowhtml
 
-    html = html.replace("__TABLE_BEG__", beg) \
-            .replace("__TABLE_INT__", inter) \
-            .replace("__TABLE_ADV__", adv) \
-            .replace("__TABLE_MODSMO__", modsmo) \
-            .replace("__TABLE_SPECIAL__", special)
+    header = templates.get("contestants/profile_table_header")
+    header_special = templates.get("contestants/profile_table_header_special")
+    for code, text in (("BEG", beg), ("INT", inter), ("ADV", adv),
+                       ("MODSMO", modsmo), ("SPECIAL", special)):
+        if text:
+            html = html.replace("__TABLE_HEADER_" + code + "__",
+                                header_special if code == "SPECIAL" else header)
+            html = html.replace("__TABLE_" + code + "__", text)
+        else:
+            html = html.replace("__TABLE_HEADER_" + code + "__", "")
+            html = html.replace("__TABLE_" + code + "__", "&emsp; No participation yet.")
+
     html = templates.final_replace(html, "../..")
     util.writefile("../dist/contestants/" + name + "/index.html", html)
 
