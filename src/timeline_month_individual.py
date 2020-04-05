@@ -36,7 +36,7 @@ def run(month):
     if month in s_db_y:
         for row in s_db_y[month]:
             rowhtml = templates.get("timeline/month/individual_row")
-            rowhtml = rowhtml.replace("__NAME__", row["name"].replace("#", "%23"))
+            rowhtml = rowhtml.replace("__NAME__", row["name"]
             rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
             rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row["rank>="] else "") + row["rank"])
             rowhtml = rowhtml.replace("__SCORE__", row["score"])
