@@ -17,17 +17,17 @@ with open("../database/estudiantes.csv", encoding="utf8") as file:
             "score": row[2],
             "name": row[3],
             "contest_name": month_indexed[row[0]]["name"],
-            "medal": row[4],
-            "website": row[5],
+            "user-id": row[4],
+            "medal": row[5],
             "rank>=": False
         }
         if entry["rank"][:2] == ">=":
             entry["rank"] = entry["rank"][2:]
             entry["rank>="] = True
         database.append(entry)
-        if entry["name"] not in contestant_grouped:
-            contestant_grouped[entry["name"]] = []
-        contestant_grouped[entry["name"]].append(entry)
+        if entry["user-id"] not in contestant_grouped:
+            contestant_grouped[entry["user-id"]] = []
+        contestant_grouped[entry["user-id"]].append(entry)
         if entry["month"] not in month_grouped:
             month_grouped[entry["month"]] = []
         month_grouped[entry["month"]].append(entry)

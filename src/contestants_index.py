@@ -12,8 +12,8 @@ def run():
     tablehtml = ""
     for contestant, history in s_db_h.items():
         rowhtml = templates.get("contestants/index_row") \
-                    .replace("__NAME__", contestant) \
-                    .replace("__NAME_NORM__", contestant.replace("#", "%23")) \
+                    .replace("__NAME__", s_db_c[contestant][0]["name"]) \
+                    .replace("__USER_ID__", contestant) \
                     .replace("__GOLD__", str(history["G"])) \
                     .replace("__SILVER__", str(history["S"])) \
                     .replace("__BRONZE__", str(history["B"])) \
