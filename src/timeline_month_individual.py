@@ -37,8 +37,8 @@ def run(month):
             rowhtml = templates.get("timeline/month/individual_row")
             rowhtml = rowhtml.replace("__NAME__", row["name"])
             rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
-            rowhtml = rowhtml.replace("__RANK__", ("&ge;" if row["rank>="] else "") + row["rank"])
-            rowhtml = rowhtml.replace("__SCORE__", row["score"])
+            rowhtml = rowhtml.replace("__RANK__", str(row["rank"]))
+            rowhtml = rowhtml.replace("__SCORE__", str(row["total_score"]))
             if row["medal"] == "G":
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/month/individual_gold"))
             elif row["medal"] == "S":

@@ -1,29 +1,81 @@
 #!/usr/bin/python
+import pickle
 import csv
+import os
+import re
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 from database_timeline import month_indexed
+
 
 database = []
 contestant_grouped = {}
 contestant_history = {}
 month_grouped = {}
 
-with open("../database/estudiantes.csv", encoding="utf8") as file:
-    reader = csv.reader(file)
-    for row in reader:
-        assert len(row) == 6, "Student row error: {}".format(row)
+
+scope = "https://www.googleapis.com/auth/spreadsheets.readonly"
+sheet_id = os.environ["SHEET_ID"]
+oauth_path = os.environ["OAUTH_PATH"]
+tab_name = ["Contest Database", "MODSMO Database"]
+sheet_range = ["A3:Q", "A3:T"]
+scores_ix = [[9, 10, 11, 12], [10, 11, 12, 13, 14, 15]]
+width = [17, 20]
+
+
+creds = None
+if os.path.exists('../dist/token.pickle'):
+    with open('../dist/token.pickle', 'rb') as token:
+        creds = pickle.load(token)
+if not creds or not creds.valid:
+    flow = InstalledAppFlow.from_client_secrets_file(oauth_path, scope)
+    creds = flow.run_local_server(port=0)
+    with open("../dist/token.pickle", "wb") as token:
+        pickle.dump(creds, token)
+
+service = build("sheets", "v4", credentials=creds)
+sheet = service.spreadsheets()
+
+
+def read_sheet(index):
+    result = sheet.values().get(
+        spreadsheetId=sheet_id,
+        range=tab_name[index] + "!" + sheet_range[index]).execute()
+
+    return result.get("values", [])
+
+
+def is_valid(row, index):
+    res = re.fullmatch(r"\d\d\d\d-\d\d-.+", row[0])
+    res = res and (row[0][0:7] in month_indexed)
+    res = res and re.fullmatch(r".+#....", row[8])
+    res = res and re.fullmatch(r"\d+", row[1])
+
+    for i in scores_ix[index]:
+        res = res and re.fullmatch(r"\d+", row[i])
+
+    res = res and re.fullmatch(r"\d+", row[scores_ix[index][-1]+1])
+    res = res and re.fullmatch(r"\d+", row[scores_ix[index][-1]+2])
+
+    return bool(res)
+
+
+for index in range(2):
+    for row in read_sheet(index):
+        if not is_valid(row, index):
+            continue
+
         entry = {
-            "month": row[0],
-            "rank": row[1],
-            "score": row[2],
-            "name": row[3],
-            "contest_name": month_indexed[row[0]]["name"],
-            "user-id": row[4],
-            "medal": row[5],
-            "rank>=": False
+            "month": row[0][0:7],
+            "user-id": row[1],
+            "name": row[scores_ix[index][0]-1],
+            "scores": [int(row[i]) for i in scores_ix[index]],
+            "total_score": int(row[scores_ix[index][-1]+1]),
+            "rank": int(row[scores_ix[index][-1]+2]),
+            "contest_name": month_indexed[row[0][0:7]]["name"],
+            "medal": row[-1][0] if len(row) == width[index] else ""
         }
-        if entry["rank"][:2] == ">=":
-            entry["rank"] = entry["rank"][2:]
-            entry["rank>="] = True
         database.append(entry)
         if entry["user-id"] not in contestant_grouped:
             contestant_grouped[entry["user-id"]] = []
@@ -34,11 +86,7 @@ with open("../database/estudiantes.csv", encoding="utf8") as file:
 
     for contestant, entries in contestant_grouped.items():
         contestant_history[contestant] = {
-            "G": 0,
-            "S": 0,
-            "B": 0,
-            "H": 0,
-            "P": 0
+            "G": 0, "S": 0, "B": 0, "H": 0, "P": 0
         }
         for entry in entries:
             contestant_history[contestant][entry["medal"] or "P"] += 1
