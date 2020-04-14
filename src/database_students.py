@@ -48,8 +48,6 @@ def read_sheet(index, sheet):
 
 
 def is_valid(row, index):
-    if index == 1:
-        print(row)
     res = re.fullmatch(r"\d\d\d\d-\d\d-.+", row[0])
     res = res and (row[0][0:7] in month_indexed)
     res = res and re.fullmatch(r".+#....", row[scores_ix[index][0]-1])
@@ -94,3 +92,9 @@ for index in range(2):
         }
         for entry in entries:
             contestant_history[contestant][entry["medal"] or "P"] += 1
+
+for _, entries in contestant_grouped.items():
+    entries.sort(key=lambda entry: entry["month"], reverse=True)
+
+for _, entries in month_grouped.items():
+    entries.sort(key=lambda entry: entry["rank"])
