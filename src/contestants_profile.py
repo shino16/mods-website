@@ -21,11 +21,15 @@ def run(user_id):
 
     beg, inter, adv, modsmo, special = [""] * 5
     for row in contestant_grouped[user_id]:
-        rowhtml = templates.get("contestants/profile_row") \
+        rowhtml = templates.get("contestants/profile_row_" + str(len(row["scores"]))) \
                     .replace("__MONTH__", row["month"]) \
                     .replace("__CONTEST_NAME__", row["contest_name"]) \
-                    .replace("__SCORE__", str(row["total_score"])) \
+                    .replace("__TOTAL_SCORE__", str(row["total_score"])) \
                     .replace("__RANK__", str(row["rank"]))
+
+        for i, x in enumerate(row["scores"]):
+            rowhtml = rowhtml.replace(f"__SCORE_{i+1}__", str(x))
+
         if row["medal"] == "G":
             rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/month/individual_gold"))
         elif row["medal"] == "S":
@@ -47,10 +51,11 @@ def run(user_id):
         else:
             special += rowhtml
 
-    header = templates.get("contestants/profile_table_header")
+    header4 = templates.get("contestants/profile_table_header_4")
+    header6 = templates.get("contestants/profile_table_header_6")
     header_special = templates.get("contestants/profile_table_header_special")
-    for code, text in (("BEG", beg), ("INT", inter), ("ADV", adv),
-                       ("MODSMO", modsmo), ("SPECIAL", special)):
+    for code, text, header in (("BEG", beg, header4), ("INT", inter, header4), ("ADV", adv, header4),
+                       ("MODSMO", modsmo, header6), ("SPECIAL", special, header_special)):
         if text:
             html = html.replace("__TABLE_HEADER_" + code + "__",
                                 header_special if code == "SPECIAL" else header)
