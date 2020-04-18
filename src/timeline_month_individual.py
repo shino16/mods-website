@@ -32,7 +32,7 @@ def run(month):
         html = html.replace("__NEXT_MONTH__", ".") # Google crawler fix
 
     tablehtml = ""
-    anon_tablehtml = ""
+    anonymous_found = False
     if month in s_db_y:
         for row in s_db_y[month]:
             rowhtml = templates.get("timeline/month/individual_row_" + str(len(row["scores"])))
@@ -57,12 +57,11 @@ def run(month):
             if row["is_anonymous"]:
                 rowhtml = rowhtml.replace("__NAME__", "")
                 rowhtml = rowhtml.replace("__USER_ID__", "")
-                rowhtml = rowhtml.replace("__ANONYMOUS_SIGN__", "(anonymous)")
                 tablehtml += rowhtml
+                anonymous_found = True
             else:
                 rowhtml = rowhtml.replace("__NAME__", row["name"])
                 rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
-                rowhtml = rowhtml.replace("__ANONYMOUS_SIGN__", "")
                 tablehtml += rowhtml
 
     header = ""
@@ -72,13 +71,8 @@ def run(month):
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__TABLE_HEADER__", header)
 
-    anon_table = ""
-    if anon_tablehtml:
-        anon_table = templates.get("timeline/month/individual_anonymous_table") \
-                        .replace("__TABLE_HEADER__", header) \
-                        .replace("__TABLE__", anon_tablehtml)
-
-    html = html.replace("__ANONYMOUS_TABLE__", anon_table)
+    html = html.replace("__ANONYMOUS_MSG__",
+                        "The names of anonymous contestants are not shown." if anonymous_found else "")
 
     html = templates.final_replace(html, "../..")
     util.writefile("../dest/timeline/" + month + "/individual.html", html)
