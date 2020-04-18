@@ -7,7 +7,7 @@ from database_timeline import database as t_db
 
 def run():
     print("Creating timeline")
-    util.makedirs("../dist/timeline")
+    util.makedirs("../dest/timeline")
     timeline_index.run()
     for monthdata in t_db:
         timeline_month.run(monthdata["month"])

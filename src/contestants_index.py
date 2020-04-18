@@ -23,7 +23,7 @@ def run():
 
     html = html.replace("__TABLE__", tablehtml)
     html = templates.final_replace(html, "..")
-    util.writefile("../dist/contestants/index.html", html)
+    util.writefile("../dest/contestants/index.html", html)
 
 if __name__ == "__main__":
     run()

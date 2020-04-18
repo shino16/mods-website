@@ -63,7 +63,7 @@ def run(month):
     html = html.replace("__TABLE_HEADER__", header)
 
     html = templates.final_replace(html, "../..")
-    util.writefile("../dist/timeline/" + month + "/individual.html", html)
+    util.writefile("../dest/timeline/" + month + "/individual.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])

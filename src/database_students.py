@@ -26,13 +26,13 @@ width = [17, 20]
 
 def get_sheet():
     creds = None
-    if os.path.exists('../dist/token.pickle'):
-        with open('../dist/token.pickle', 'rb') as token:
+    if os.path.exists('../dest/token.pickle'):
+        with open('../dest/token.pickle', 'rb') as token:
             creds = pickle.load(token)
     if not creds or not creds.valid:
         flow = InstalledAppFlow.from_client_secrets_file(oauth_path, scope)
         creds = flow.run_local_server(port=0)
-        with open("../dist/token.pickle", "wb") as token:
+        with open("../dest/token.pickle", "wb") as token:
             pickle.dump(creds, token)
 
     service = build("sheets", "v4", credentials=creds)

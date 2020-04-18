@@ -80,7 +80,7 @@ def run(month):
     html = html.replace("__TABLE__", tablehtml)
 
     html = templates.final_replace(html, "../..")
-    util.writefile("../dist/timeline/" + month + "/country.html", html)
+    util.writefile("../dest/timeline/" + month + "/country.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])

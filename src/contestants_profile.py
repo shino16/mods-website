@@ -65,7 +65,7 @@ def run(user_id):
             html = html.replace("__TABLE_" + code + "__", "&emsp; No participation yet.")
 
     html = templates.final_replace(html, "../..")
-    util.writefile("../dist/contestants/" + user_id + "/index.html", html)
+    util.writefile("../dest/contestants/" + user_id + "/index.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])

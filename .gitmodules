@@ -1,0 +1,3 @@
+[submodule "dest"]
+	path = dest
+	url = https://github.com/shino-sky/publish-mods-website

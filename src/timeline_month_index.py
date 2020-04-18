@@ -69,7 +69,7 @@ def run(month):
         html = html.replace("__AWARDS_STYLE__", "display: none;")
 
     html = templates.final_replace(html, "../..")
-    util.writefile("../dist/timeline/" + month + "/index.html", html)
+    util.writefile("../dest/timeline/" + month + "/index.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])
