@@ -3,6 +3,7 @@ import util
 import config
 from database_timeline import month_indexed as t_db_m
 
+
 def get(path, templates={}):
     """
     Load HTML from file and return as string
@@ -11,6 +12,7 @@ def get(path, templates={}):
     if path not in templates:
         templates[path] = util.readfile("templates/" + path + ".html")
     return templates[path]
+
 
 def initial_replace(html, type):
     """
@@ -27,12 +29,15 @@ def initial_replace(html, type):
         side = side.replace("__HIGHLIGHT_2__", "")
         side = side.replace("__HIGHLIGHT_3__", "")
         html = html.replace("__HEADER_SIDE__", side)
-    html = html.replace("__HEADER_PREVIOUS_MONTH__", config.previous_month)
-    # html = html.replace("__HEADER_PREVIOUS_MONTH_HOMEPAGE__", t_db_m[config.previous_month]["homepage"])
-    html = html.replace("__HEADER_NEXT_MONTH__", config.next_month)
-    # html = html.replace("__HEADER_NEXT_MONTH_HOMEPAGE__", t_db_m[config.next_month]["homepage"])
+    html = html.replace("__PREVIOUS_MONTH__", config.previous_month)
+    html = html.replace("__PREVIOUS_MONTH_NAME__", config.previous_month +
+                        " - " + t_db_m[config.previous_month]["name"])
+    html = html.replace("__NEXT_MONTH__", config.next_month)
+    html = html.replace("__NEXT_MONTH_NAME__", config.next_month +
+                        " - " + t_db_m[config.next_month]["name"])
     html = html.replace("__FOOTER__", get("footer"))
     return html
+
 
 def final_replace(html, root):
     """
