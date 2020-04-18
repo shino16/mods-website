@@ -32,11 +32,10 @@ def run(month):
         html = html.replace("__NEXT_MONTH__", ".") # Google crawler fix
 
     tablehtml = ""
+    anon_tablehtml = ""
     if month in s_db_y:
         for row in s_db_y[month]:
             rowhtml = templates.get("timeline/month/individual_row_" + str(len(row["scores"])))
-            rowhtml = rowhtml.replace("__NAME__", row["name"])
-            rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
             rowhtml = rowhtml.replace("__TOTAL_SCORE__", str(row["total_score"]))
             rowhtml = rowhtml.replace("__RANK__", str(row["rank"]))
             rowhtml = rowhtml.replace("__TABLE_HEADER__", str())
@@ -54,13 +53,30 @@ def run(month):
                 rowhtml = rowhtml.replace("__MEDAL__", templates.get("timeline/month/individual_honourable"))
             else:
                 rowhtml = rowhtml.replace("__MEDAL__", "")
-            tablehtml += rowhtml
-    html = html.replace("__TABLE__", tablehtml)
+
+            if row["is_anonymous"]:
+                rowhtml = rowhtml.replace("__NAME__", "")
+                rowhtml = rowhtml.replace("__USER_ID__", "")
+                anon_tablehtml += rowhtml
+            else:
+                rowhtml = rowhtml.replace("__NAME__", row["name"])
+                rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
+                tablehtml += rowhtml
 
     header = ""
     if month in s_db_y and len(s_db_y[month]) >= 1:
         header = templates.get("timeline/month/individual_header_" + str(len(s_db_y[month][0]["scores"])))
+
+    html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__TABLE_HEADER__", header)
+
+    anon_table = ""
+    if anon_tablehtml:
+        anon_table = templates.get("timeline/month/individual_anonymous_table") \
+                        .replace("__TABLE_HEADER__", header) \
+                        .replace("__TABLE__", anon_tablehtml)
+
+    html = html.replace("__ANONYMOUS_TABLE__", anon_table)
 
     html = templates.final_replace(html, "../..")
     util.writefile("../dest/timeline/" + month + "/individual.html", html)

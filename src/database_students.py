@@ -14,6 +14,7 @@ tab_name = ["Contest Database", "MODSMO Database"]
 sheet_range = ["A3:Q", "A3:T"]
 scores_ix = [[9, 10, 11, 12], [10, 11, 12, 13, 14, 15]]
 width = [17, 20]
+anonymity_ix = [6, 7]
 
 
 def is_valid(row, index):
@@ -44,7 +45,8 @@ for index in range(2):
             "total_score": int(row[scores_ix[index][-1]+1]),
             "rank": int(row[scores_ix[index][-1]+2]),
             "contest_name": month_indexed[row[0][:7]]["name"],
-            "medal": row[-1][0] if len(row) == width[index] else ""
+            "medal": row[-1][0] if len(row) == width[index] else "",
+            "is_anonymous": row[anonymity_ix[index]] == "Yes"
         }
         database.append(entry)
         if entry["user-id"] not in contestant_grouped:
