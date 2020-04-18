@@ -8,8 +8,10 @@ from database_students import contestant_history
 from database_students import contestant_grouped
 
 def run(user_id):
-    print("Creating contestants/" + user_id + "/index")
     history = contestant_history[user_id]
+    if sum(history.values()) == 0:
+        return
+    print("Creating contestants/" + user_id + "/index")
     html = templates.get("contestants/profile")
     html = templates.initial_replace(html, 2) \
             .replace("__NAME__", contestant_grouped[user_id][0]["name"]) \

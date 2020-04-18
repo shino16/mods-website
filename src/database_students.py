@@ -61,7 +61,8 @@ for index in range(2):
             "G": 0, "S": 0, "B": 0, "H": 0, "P": 0
         }
         for entry in entries:
-            contestant_history[contestant][entry["medal"] or "P"] += 1
+            if not entry["is_anonymous"]:
+                contestant_history[contestant][entry["medal"] or "P"] += 1
 
 for _, entries in contestant_grouped.items():
     entries.sort(key=lambda entry: entry["month"], reverse=True)

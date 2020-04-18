@@ -29,7 +29,10 @@ def parse_dates(row):
         return bool(re.fullmatch(r"[A-Z][a-z][a-z]-\d\d.*", cell))
 
     dates = [cell[:6] for cell in row if is_date(cell)]
-    return dates[0] + " - " + dates[-1]
+    assert(len(dates) > 0)
+
+    month = dates[0][:3]
+    return dates[0][4:] + "–" + dates[-1][4:] + " " + month
 
 
 column_no_participants = 6
