@@ -57,10 +57,12 @@ def run(month):
             if row["is_anonymous"]:
                 rowhtml = rowhtml.replace("__NAME__", "")
                 rowhtml = rowhtml.replace("__USER_ID__", "")
-                anon_tablehtml += rowhtml
+                rowhtml = rowhtml.replace("__ANONYMOUS_SIGN__", "(anonymous)")
+                tablehtml += rowhtml
             else:
                 rowhtml = rowhtml.replace("__NAME__", row["name"])
                 rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
+                rowhtml = rowhtml.replace("__ANONYMOUS_SIGN__", "")
                 tablehtml += rowhtml
 
     header = ""
