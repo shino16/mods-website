@@ -39,13 +39,6 @@ def run(month):
     else:
         html = html.replace("__P_STUDENT_STYLE__", "display: none;")
 
-    if monthdata["homepage"] != "":
-        html = html.replace("__HOMEPAGE_STYLE__", "")
-        html = html.replace("__HOMEPAGE__", monthdata["homepage"])
-    else:
-        html = html.replace("__HOMEPAGE_STYLE__", "display: none;")
-        html = html.replace("__HOMEPAGE__", ".") # Google crawler fix
-
     gold = 0
     silver = 0
     bronze = 0
