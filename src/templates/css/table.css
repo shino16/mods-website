@@ -109,6 +109,16 @@
 	border: 1px solid #BEB761;
 }
 
+#main table.anonymous td:nth-child(1),
+#main table.anonymous td:nth-child(2) {
+	background-image: linear-gradient(
+		to top right,
+		transparent 48%,
+		black,
+		transparent 52%
+	);
+}
+
 #main table .noBorder
 {
 	border: 0;
