@@ -21,6 +21,9 @@ def run(user_id):
 
     beg, inter, adv, modsmo, special = [""] * 5
     for row in contestant_grouped[user_id]:
+        if row["is_anonymous"]:
+            continue
+
         rowhtml = templates.get("contestants/profile_row_" + str(len(row["scores"]))) \
                     .replace("__MONTH__", row["month"]) \
                     .replace("__CONTEST_NAME__", row["contest_name"]) \
