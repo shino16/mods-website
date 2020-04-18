@@ -31,10 +31,10 @@ def initial_replace(html, type):
         html = html.replace("__HEADER_SIDE__", side)
     html = html.replace("__HEADER_PREVIOUS_MONTH__", config.previous_month)
     html = html.replace("__HEADER_PREVIOUS_MONTH_NAME__", config.previous_month +
-                        " - " + t_db_m[config.previous_month]["name"])
+                        " — " + t_db_m[config.previous_month]["name"])
     html = html.replace("__HEADER_NEXT_MONTH__", config.next_month)
     html = html.replace("__HEADER_NEXT_MONTH_NAME__", config.next_month +
-                        " - " + t_db_m[config.next_month]["name"])
+                        " — " + t_db_m[config.next_month]["name"])
     html = html.replace("__FOOTER__", get("footer"))
     return html
 
