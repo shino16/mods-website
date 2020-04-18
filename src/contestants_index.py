@@ -11,8 +11,6 @@ def run():
 
     tablehtml = ""
     for contestant, history in s_db_h.items():
-        if sum(history.values()) == 0:
-            continue
         rowhtml = templates.get("contestants/index_row") \
                     .replace("__NAME__", s_db_c[contestant][0]["name"]) \
                     .replace("__USER_ID__", contestant) \
