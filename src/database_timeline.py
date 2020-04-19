@@ -32,7 +32,7 @@ def parse_dates(row):
     assert(len(dates) > 0)
 
     month = dates[0][:3]
-    return dates[0][4:] + "–" + dates[-1][4:] + " " + month
+    return dates[0][4:] + "–" + dates[-1][4:] + " " + month + " " + row[0][:4]
 
 column_no_participants = 6
 
