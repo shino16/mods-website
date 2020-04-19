@@ -109,12 +109,18 @@
 	border: 1px solid #BEB761;
 }
 
-#main table.profile {
+#main table.profile,
+#main table.stats {
 	margin-inline-start: 30px;
 }
 
-#main p.profile {
-	margin-left: 10px;
+#main table.stats tr.mean {
+	background-color: #F5F5F5;
+}
+
+#main table.stats tr.max,
+#main table.stats tr.sigma {
+	background-color: transparent;
 }
 
 #main table .noBorder

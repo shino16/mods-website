@@ -73,7 +73,7 @@ def run(user_id):
             html = html.replace("__TABLE_" + code + "__", text)
         else:
             html = html.replace("__TABLE_HEADER_" + code + "__", "")
-            html = html.replace("__TABLE_" + code + "__", "&emsp; No participation yet.")
+            html = html.replace("__TABLE_" + code + "__", "<dd>No participation yet.</dd>")
         html = html.replace("__ANONYMOUS_MSG_" + code + "__",
                 "Results of anonymous participations are hidden." if anon else "")
 
