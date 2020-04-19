@@ -110,7 +110,7 @@
 }
 
 #main table.profile {
-	margin-left: 10px;
+	margin-inline-start: 30px;
 }
 
 #main p.profile {

@@ -23,11 +23,24 @@ __HEADER_SIDE__
         <dd>Date: __DATE__</dd>
         <dd style="__P_STUDENT_STYLE__">Number of contestants: __P_STUDENT__.</dd>
         <div style="__AWARDS_STYLE__">
-            <dt>Awards</dt>
-                <dd>Gold medals: __GOLD__.<br>
-                Silver medals: __SILVER__.<br>
-                Bronze medals: __BRONZE__.<br>
-                Honourable mentions: __HONOURABLE__.</dd>
+        <dt>Awards</dt>
+            <dd>Gold medals: __GOLD__.<br>
+            Silver medals: __SILVER__.<br>
+            Bronze medals: __BRONZE__.<br>
+            Honourable mentions: __HONOURABLE__.</dd>
+        </div>
+        <div style="__STATS_STYLE__">
+        <dt>Statistics</dt>
+        <table class="stats">
+            <thead>__TABLE_HEADER__</thead>
+            <tbody>
+                __TABLE_NUM__
+                <tr><td colspan="7"></td></tr>
+                __TABLE_MEAN__
+                __TABLE_MAX__
+                __TABLE_SIGMA__
+            </tbody>
+        </table>
         </div>
 	</dl>
 </div>
