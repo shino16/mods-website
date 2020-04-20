@@ -10,7 +10,6 @@ def run():
     html = templates.initial_replace(html, 2)
 
     tablehtml = ""
-    print(s_db_h.items())
     sorted_items = sorted(s_db_h.items(), reverse=True, key=lambda item: ("%02d" * 5) % (item[1]["G"], item[1]["S"], item[1]["B"], item[1]["H"], sum(item[1].values())))
     for contestant, history in sorted_items:
         rowhtml = templates.get("contestants/index_row") \
