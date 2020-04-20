@@ -31,4 +31,4 @@ sheet = get_sheet()
 def read_sheet(tab, sheet_range):
     result = sheet.values().get(spreadsheetId=sheet_id,
                                 range=tab + "!" + sheet_range).execute()
-    return result.get("values", [])
+    return [[s.strip() for s in row] for row in result.get("values", [])]

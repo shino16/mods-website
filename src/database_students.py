@@ -20,8 +20,8 @@ anonymity_ix = [6, 7]
 def is_valid(row, index):
     res = row and re.fullmatch(r"\d\d\d\d-\d\d-.+", row[0])
     res = res and (row[0][:7] in month_indexed)
-    res = res and re.fullmatch(r".+#....", row[scores_ix[index][0]-1])
     res = res and re.fullmatch(r"\d+", row[1])
+    res = res and re.fullmatch(r".+#\d\d\d\d", row[scores_ix[index][0]-1])
 
     for i in scores_ix[index]:
         res = res and re.fullmatch(r"\d+", row[i])
@@ -48,6 +48,10 @@ for index in range(2):
             "medal": row[-1][0] if len(row) == width[index] else "",
             "is_anonymous": row[anonymity_ix[index]] == "Yes"
         }
+
+        if entry["month"] == "2019-05" and entry["is_anonymous"]:
+            continue
+
         database.append(entry)
         if entry["user-id"] not in contestant_grouped:
             contestant_grouped[entry["user-id"]] = []
@@ -66,5 +70,10 @@ for index in range(2):
 for _, entries in contestant_grouped.items():
     entries.sort(key=lambda entry: entry["month"], reverse=True)
 
-for _, entries in month_grouped.items():
+for month, entries in month_grouped.items():
+    if month != "2019-05" and int(month_indexed[month]["p_student"]) != len(entries):
+        print(month)
+        print(month_indexed[month])
+        print([entry["name"] for entry in entries])
+        raise Exception(f"Number of participants in {month} does not match")
     entries.sort(key=lambda entry: entry["rank"])

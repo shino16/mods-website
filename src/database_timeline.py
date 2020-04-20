@@ -25,7 +25,6 @@ def parse_contest_name(raw):
 
 def parse_dates(row):
     def is_date(cell):
-        # (uppercase)(lowercase)(lowercase)-(digit)(digit)
         return bool(re.fullmatch(r"[A-Z][a-z][a-z]-\d\d.*", cell))
 
     dates = [cell[:6] for cell in row if is_date(cell)]
