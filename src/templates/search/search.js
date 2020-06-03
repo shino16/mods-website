@@ -44,7 +44,7 @@
                     var ps = lines[i].trim().split(",");
                     if (ps.length >= 9 && ps[8] === "False") {
                         students.push({
-                            rawData: lines[i].trim(),
+                            rawData: lines[i].trim().toLowerCase(),
                             month: ps[0],
                             userId: ps[1],
                             name: ps[2],
@@ -70,7 +70,7 @@
         var t_bronze = document.getElementById("t_bronze").innerHTML;
         var t_honourable = document.getElementById("t_honourable").innerHTML;
         var query = document.getElementById("search_query").value;
-        query = asciify(query).toLowerCase().trim();
+        query = query.trim().toLowerCase();
         if (query.length == 0) return;
         for (var i = 0; i < students.length; i++) {
             if (students[i].rawData.indexOf(query) == -1) {
