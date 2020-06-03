@@ -2,15 +2,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-<link href="__ROOT__/img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
-<link href="__ROOT__/css/design.css" rel="stylesheet" type="text/css" />
-<link href="__ROOT__/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="../img/fav-logo.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="../css/design.css" rel="stylesheet" type="text/css" />
+<link href="../css/print.css" rel="stylesheet" type="text/css" media="print" />
 <title>Search — Mathematical Olympiads Discord Server</title>
 <script src="asciify.js"></script>
 <script src="search.js"></script>
 </head>
 <body>
-__HEADER_SIDE__
+<div id="header">
+    <div id="h1">
+        <h1><a href="../">Mathematical Olympiads Discord Server</a></h1>
+    </div>
+    <div id="sub">
+        <span class="previous"><a href="../timeline/2020-04">2020-04 Beginner</a></span>
+        <span class="img"><a href="../"><img src="../img/logo.png" alt="MODS" width="30" height="22"/></a></span>
+        <span class="next"><a href="../timeline/2020-05">2020-05 Intermediate</a></span>
+    </div>
+</div>
+<div id="sidebar">
+    <ul>
+        <li><a href="../timeline/" class="">Timeline</a></li>
+        <li><a href="../contestants/" class="">Contestants</a></li>
+        <li><a href="../search/" class="highlight">Search</a></li>
+        <li><a target="_blank" href="https://github.com/Mathematical-Olympiads-Discord-Server/files/tree/master/Contests">Problems</a></li>
+        <li><a target="_blank" href="http://bit.ly/MODS_discord_guide">MODS Discord Guide</a></li>
+    </ul>
+</div>
+
 <div id="main">
     <h2>Search</h2>
     <p>
@@ -18,43 +37,43 @@ __HEADER_SIDE__
     <input type="submit" value="Search" class="btnSubmit" onclick="mods_search()" />
     <span>(Search the MODS database for a particular contestant)</span>
     </p>
-    <table id="table">
+    <table>
         <thead><tr>
-            <th class="sort" data-sort="UserID">UserID</th>
-            <th class="sort" data-sort="Contestant">Contestant</th>
-            <th class="sort" data-sort="Contest">Contest</th>
-            <th class="sort" data-sort="Total">Total</th>
-            <th class="sort" data-sort="Rank">Rank</th>
-            <th data-sort="Award">Award</th>
+            <th>UserID</th>
+            <th>Contestant</th>
+            <th>Contest</th>
+            <th>Total</th>
+            <th>Rank</th>
+            <th>Award</th>
         </tr></thead>
-    <tbody id="search_results" class="list">
+    <tbody id="search_results">
     </tbody>
     </table>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-    <script>
-        var options = {
-            valueNames: ["UserID", "Contestant", "Contest", "Total", "Rank", "Award"]
-        };
-        var userList = new List("table", options);
-    </script>
-
 </div>
-__FOOTER__
+<div id="footer">
+<a href="https://discord.gg/q93Wrgn" target="_blank">Join us!</a>
+&bull;
+<a href="http://bit.ly/MODS_patreon" target="_blank">Donate</a>
+&bull;
+<b>Email:</b>
+<a href="mailto:mo.discord.server@gmail.com">mo.discord.server@gmail.com</a>
+</div>
+
 <table>
 
 <tr style="display: none;" id="t_row">
-    <td class="UserID"><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{userId}}</a></td>
-    <td class="Contestant"><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{name}}</a></td>
-    <td class="Contest"><a href="__ROOT__/timeline/{{month}}/__INDEX__">{{contest}}</a></td>
-    <td class="Total" align="right">{{totalScore}}</td>
-    <td class="Rank" align="right">{{rank}}</td>
-    <td class="Award">{{medal}}</td>
+    <td><a href="../contestants/{{userId}}/">{{userId}}</a></td>
+    <td><a href="../contestants/{{userId}}/">{{name}}</a></td>
+    <td><a href="../timeline/{{month}}/">{{contest}}</a></td>
+    <td align="right">{{totalScore}}</td>
+    <td align="right">{{rank}}</td>
+    <td>{{medal}}</td>
 </tr>
 </table>
-<div style="display: none;" id="t_gold"><img src="__ROOT__/img/gold.png" width="9" height="9"> Gold Medal</div>
-<div style="display: none;" id="t_silver"><img src="__ROOT__/img/silver.png" width="9" height="9"> Silver Medal</div>
-<div style="display: none;" id="t_bronze"><img src="__ROOT__/img/bronze.png" width="9" height="9"> Bronze Medal</div>
-<div style="display: none;" id="t_honourable"><img src="__ROOT__/img/honourable.png" width="9" height="9"> Honourable Mention</div>
+<div style="display: none;" id="t_gold"><img src="../img/gold.png" width="9" height="9"> Gold Medal</div>
+<div style="display: none;" id="t_silver"><img src="../img/silver.png" width="9" height="9"> Silver Medal</div>
+<div style="display: none;" id="t_bronze"><img src="../img/bronze.png" width="9" height="9"> Bronze Medal</div>
+<div style="display: none;" id="t_honourable"><img src="../img/honourable.png" width="9" height="9"> Honourable Mention</div>
 </body>
 </html>
 
