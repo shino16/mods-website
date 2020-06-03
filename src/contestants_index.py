@@ -9,8 +9,12 @@ def run():
     html = templates.get("contestants/index")
     html = templates.initial_replace(html, 2)
 
+    def keyfn(item):
+        return (item[1]["G"], item[1]["S"], item[1]["B"],
+                item[1]["H"], sum(item[1].values()))
+
+    sorted_items = sorted(s_db_h.items(), reverse=True, key=keyfn)
     tablehtml = ""
-    sorted_items = sorted(s_db_h.items(), reverse=True, key=lambda item: ("%02d" * 5) % (item[1]["G"], item[1]["S"], item[1]["B"], item[1]["H"], sum(item[1].values())))
     for contestant, history in sorted_items:
         rowhtml = templates.get("contestants/index_row") \
                     .replace("__NAME__", s_db_c[contestant][0]["name"]) \

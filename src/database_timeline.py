@@ -10,7 +10,7 @@ next_month = {}
 
 
 tab_name = "Metadata"
-sheet_range = "A3:BY"
+sheet_range = "A4:BY"
 
 
 def is_valid(row):

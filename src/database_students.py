@@ -12,8 +12,8 @@ month_grouped = {}
 
 tab_name = ["Contest Database", "MODSMO Database"]
 sheet_range = ["A3:Q", "A3:T"]
-scores_ix = [[9, 10, 11, 12], [10, 11, 12, 13, 14, 15]]
-width = [17, 20]
+scores_ix = [[8, 9, 10, 11], [9, 10, 11, 12, 13, 14]]
+width = [16, 19]
 anonymity_ix = [6, 7]
 
 
