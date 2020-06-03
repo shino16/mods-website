@@ -1,10 +1,20 @@
 #!/usr/bin/python
 from distutils.dir_util import copy_tree
+from database_students import database as s_db
+from database_timeline import database as t_db
 
 def run():
     print("Copying static files")
     copy_tree("./templates/img",  "../dest/img")
     copy_tree("./templates/css",  "../dest/css")
+    with open("../dest/search/students.csv", "w", encoding="utf8") as f:
+        for entry in s_db:
+            f.write(",".join(map(str, entry.values())))
+            f.write("\n")
+    with open("../dest/search/timeline.csv", "w", encoding="utf8") as f:
+        for entry in t_db:
+            f.write(",".join(map(str, entry.values())))
+            f.write("\n")
 
 if __name__ == "__main__":
     run()
