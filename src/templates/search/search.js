@@ -1,27 +1,31 @@
 // Requries asciify.js
 
 (function () {
-    if (typeof(asciify) != "function") {
+    if (typeof (asciify) != "function") {
         console.error("asciify not imported!");
         return;
     }
     var countries = null;
     var students = null;
-    function loadCountries() {
+    function loadTimeline() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "countries.csv", true);
+        var dirs = location.href.split("/");
+        var pardir = "";
+        for (var i = 0; i < dirs.length - 1; i++)
+            pardir += dirs[i] + "/";
+        alert(pardir + "students.csv")
+        xmlhttp.open("GET", pardir + "timeline.csv", true);
         xmlhttp.overrideMimeType("text/plain");
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             // Let's ignore xmlhttp.status as it doesn't work local
-            if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
-                countries = [];
-                countries[""] = "";
+            if (xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
+                contests = new Map();
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
-                for(var i = 0; i < lines.length; i++) {
+                for (var i = 0; i < lines.length; i++) {
                     var ps = lines[i].split(",");
-                    if (ps.length > 2) {
-                        countries[ps[0]] = ps[1];
+                    if (ps.length >= 3) {
+                        contests.set(ps[2], ps[2] + " " + ps[1]);
                     }
                 }
             }
@@ -30,25 +34,32 @@
     }
     function loadStudents() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "estudiantes.csv", true);
+        var dirs = location.href.split("/");
+        var pardir = "";
+        for (var i = 0; i < dirs.length - 1; i++)
+            pardir += dirs[i] + "/";
+        alert(pardir + "students.csv")
+        xmlhttp.open("GET", pardir + "students.csv", true);
         xmlhttp.overrideMimeType("text/plain");
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             // Let's ignore xmlhttp.status as it doesn't work local
-            if(xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
+            if (xmlhttp.readyState == 4 && xmlhttp.responseText != null) {
                 students = [];
                 var tx = xmlhttp.responseText;
                 var lines = tx.split("\n");
-                for(var i = 0; i < lines.length; i++) {
+                for (var i = 0; i < lines.length; i++) {
                     var ps = lines[i].trim().split(",");
-                    if (ps.length > 4) {
+                    if (ps.length >= 9 && ps[8] === "False") {
                         students.push({
                             month: ps[0],
-                            rank: ps[1],
+                            userId: ps[1],
                             name: ps[2],
-                            code: ps[3],
-                            medal: ps[4],
-                            website: ps[8],
-                            name_ascii_lower: asciify(ps[2]).toLowerCase(),
+                            scores: ps[3].split("-"),
+                            totalScore: ps[4],
+                            rank: ps[5],
+                            contestName: ps[6],
+                            medal: ps[7],
+                            nameAsciiLower: asciify(ps[2]).toLowerCase(),
                         });
                     }
                 }
@@ -56,35 +67,27 @@
         }
         xmlhttp.send();
     }
-    window.mods_search = function() {
-        if(countries == null || students == null) {
-          return;
-        }
+    window.mods_search = function () {
+        if (!students) return;
+        if (!contests) contests = new Map();
         var html = "";
         var t_row = document.getElementById("t_row").innerHTML;
-        var t_website = document.getElementById("t_website").innerHTML;
         var t_gold = document.getElementById("t_gold").innerHTML;
         var t_silver = document.getElementById("t_silver").innerHTML;
         var t_bronze = document.getElementById("t_bronze").innerHTML;
         var t_honourable = document.getElementById("t_honourable").innerHTML;
         var query = document.getElementById("search_query").value;
         query = asciify(query).toLowerCase().trim();
-        if(query.length <= 1) {
-            return;
-        }
-        for(var i = 0; i < students.length; i++) {
-            if(students[i].name_ascii_lower.indexOf(query) != -1) {
-                var row = t_row.replace(/{{code}}/g, students[i].code)
-                    .replace(/{{country}}/g, countries[students[i].code])
-                    .replace(/{{month}}/g, students[i].month);
-                if (students[i].website) {
-                    var link = t_website.replace(/{{name}}/, students[i].name)
-                                        .replace(/{{link}}/, students[i].website);
-                    row = row.replace(/{{name}}/, link)
-                } else {
-                    row = row.replace(/{{name}}/, students[i].name)
-                }
-                switch(students[i].medal) {
+        if (query.length == 0) return;
+        for (var i = 0; i < students.length; i++) {
+            if (students[i].nameAsciiLower.indexOf(query) != -1) {
+                var row = t_row.replace(/{{userId}}/g, students[i].userId)
+                    .replace(/{{name}}/g, students[i].name)
+                    .replace(/{{month}}/g, students[i].month)
+                    .replace(/{{contest}}/g, contests.get(students[i].month) || "")
+                    .replace(/{{totalScore}}/g, students[i].totalScore)
+                    .replace(/{{rank}}/g, students[i].rank)
+                switch (students[i].medal) {
                     case "G":
                         row = row.replace(/{{medal}}/g, t_gold);
                         break;
@@ -106,6 +109,6 @@
         }
         document.getElementById("search_results").innerHTML = html;
     }
-    loadCountries();
+    loadTimeline();
     loadStudents();
 })();

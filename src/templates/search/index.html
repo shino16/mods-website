@@ -20,21 +20,23 @@ __HEADER_SIDE__
     </p>
     <p><b>This feature is work in progress!</b></p>
     <table>
-    <thead><tr><th>Participant</th><th>Contest</th><th>Country</th><th>Award</th></tr></thead>
+        <thead><tr><th>UserID</th><th>Contestant</th><th>Contest</th><th>Total</th><th>Rank</th><th>Award</th></tr></thead>
     <tbody id="search_results">
     </tbody>
     </table>
 </div>
 __FOOTER__
 <table>
+
 <tr style="display: none;" id="t_row">
-<td>{{name}}</td>
-<td><a href="__ROOT__/timeline/{{month}}/__INDEX__" rel="nofollow">{{month}}</a></td>
-<td><a href="__ROOT__/contestants/{{code}}/__INDEX__" rel="nofollow">{{country}}</a></td>
-<td>{{medal}}</td>
+    <td><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{userId}}</a></td>
+    <td><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{name}}</a></td>
+    <td><a href="__ROOT__/timeline/{{month}}/__INDEX__">{{contest}}</a></td>
+    <td align="right">{{totalScore}}</td>
+    <td align="right">{{rank}}</td>
+    <td>{{medal}}</td>
 </tr>
 </table>
-<div style="display: none;" id="t_website"><a href="{{link}}" style="text-decoration: underline;" target="_blank">{{name}}</a></div>
 <div style="display: none;" id="t_gold"><img src="__ROOT__/img/gold.png" width="9" height="9"> Gold Medal</div>
 <div style="display: none;" id="t_silver"><img src="__ROOT__/img/silver.png" width="9" height="9"> Silver Medal</div>
 <div style="display: none;" id="t_bronze"><img src="__ROOT__/img/bronze.png" width="9" height="9"> Bronze Medal</div>
