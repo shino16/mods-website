@@ -1,10 +1,5 @@
-// Requries asciify.js
 
 (function () {
-    if (typeof (asciify) != "function") {
-        console.error("asciify not imported!");
-        return;
-    }
     var countries = null;
     var students = null;
     function loadTimeline() {
@@ -56,8 +51,7 @@
                             totalScore: ps[4],
                             rank: ps[5],
                             contestName: ps[6],
-                            medal: ps[7],
-                            nameAsciiLower: asciify(ps[2]).toLowerCase(),
+                            medal: ps[7]
                         });
                     }
                 }
@@ -78,32 +72,35 @@
         query = asciify(query).toLowerCase().trim();
         if (query.length == 0) return;
         for (var i = 0; i < students.length; i++) {
-            if (students[i].nameAsciiLower.indexOf(query) != -1) {
-                var row = t_row.replace(/{{userId}}/g, students[i].userId)
-                    .replace(/{{name}}/g, students[i].name)
-                    .replace(/{{month}}/g, students[i].month)
-                    .replace(/{{contest}}/g, contests.get(students[i].month) || "")
-                    .replace(/{{totalScore}}/g, students[i].totalScore)
-                    .replace(/{{rank}}/g, students[i].rank)
-                switch (students[i].medal) {
-                    case "G":
-                        row = row.replace(/{{medal}}/g, t_gold);
-                        break;
-                    case "S":
-                        row = row.replace(/{{medal}}/g, t_silver);
-                        break;
-                    case "B":
-                        row = row.replace(/{{medal}}/g, t_bronze);
-                        break;
-                    case "H":
-                        row = row.replace(/{{medal}}/g, t_honourable);
-                        break;
-                    default:
-                        row = row.replace(/{{medal}}/g, "");
-                        break;
-                }
-                html += "<tr>" + row + "</tr>";
+            var matched = false;
+            for (const v of students[i].values()) {
+                matched = matched || v.indexOf(query) != -1;
             }
+            if (!matched) continue;
+            var row = t_row.replace(/{{userId}}/g, students[i].userId)
+                .replace(/{{name}}/g, students[i].name)
+                .replace(/{{month}}/g, students[i].month)
+                .replace(/{{contest}}/g, contests.get(students[i].month) || "")
+                .replace(/{{totalScore}}/g, students[i].totalScore)
+                .replace(/{{rank}}/g, students[i].rank)
+            switch (students[i].medal) {
+                case "G":
+                    row = row.replace(/{{medal}}/g, t_gold);
+                    break;
+                case "S":
+                    row = row.replace(/{{medal}}/g, t_silver);
+                    break;
+                case "B":
+                    row = row.replace(/{{medal}}/g, t_bronze);
+                    break;
+                case "H":
+                    row = row.replace(/{{medal}}/g, t_honourable);
+                    break;
+                default:
+                    row = row.replace(/{{medal}}/g, "");
+                    break;
+            }
+            html += "<tr>" + row + "</tr>";
         }
         document.getElementById("search_results").innerHTML = html;
     }
