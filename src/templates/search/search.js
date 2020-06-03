@@ -13,7 +13,6 @@
         var pardir = "";
         for (var i = 0; i < dirs.length - 1; i++)
             pardir += dirs[i] + "/";
-        alert(pardir + "students.csv")
         xmlhttp.open("GET", pardir + "timeline.csv", true);
         xmlhttp.overrideMimeType("text/plain");
         xmlhttp.onreadystatechange = function () {
@@ -38,7 +37,6 @@
         var pardir = "";
         for (var i = 0; i < dirs.length - 1; i++)
             pardir += dirs[i] + "/";
-        alert(pardir + "students.csv")
         xmlhttp.open("GET", pardir + "students.csv", true);
         xmlhttp.overrideMimeType("text/plain");
         xmlhttp.onreadystatechange = function () {
