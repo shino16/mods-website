@@ -44,6 +44,7 @@
                     var ps = lines[i].trim().split(",");
                     if (ps.length >= 9 && ps[8] === "False") {
                         students.push({
+                            rawData: lines[i].trim(),
                             month: ps[0],
                             userId: ps[1],
                             name: ps[2],
@@ -72,11 +73,9 @@
         query = asciify(query).toLowerCase().trim();
         if (query.length == 0) return;
         for (var i = 0; i < students.length; i++) {
-            var matched = false;
-            for (const v of students[i].values()) {
-                matched = matched || v.indexOf(query) != -1;
+            if (students[i].rawData.indexOf(query) == -1) {
+                continue;
             }
-            if (!matched) continue;
             var row = t_row.replace(/{{userId}}/g, students[i].userId)
                 .replace(/{{name}}/g, students[i].name)
                 .replace(/{{month}}/g, students[i].month)
