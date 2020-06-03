@@ -19,54 +19,69 @@ __HEADER_SIDE__
     <dd>Gold medals: __GOLD__. Silver medals: __SILVER__. Bronze medals: __BRONZE__. Honourable mentions: __HONOURABLE_MENTION__. Participations: __PARTICIPATIONS__</dd>
     </dl>
     <dl class="wide"><dt>Beginner Contests</dt></dl>
-    <table class="profile">
+    <table id="tableBEG" class="profile">
     <thead>
         __TABLE_HEADER_BEG__
     </thead>
-    <tbody>
+    <tbody class="list">
         __TABLE_BEG__
     </tbody>
     </table>
     <p class="profile">__ANONYMOUS_MSG_BEG__</p>
     <dl class="wide"><dt>Intermediate Contests</dt></dl>
-    <table class="profile">
+    <table id="tableINT" class="profile">
     <thead>
         __TABLE_HEADER_INT__
     </thead>
-    <tbody>
+    <tbody class="list">
         __TABLE_INT__
     </tbody>
     </table>
     <p class="profile">__ANONYMOUS_MSG_INT__</p>
     <dl class="wide"><dt>Advanced Contests</dt></dl>
-    <table class="profile">
+    <table id="tableADV" class="profile">
     <thead>
         __TABLE_HEADER_ADV__
     </thead>
-    <tbody>
+    <tbody class="list">
         __TABLE_ADV__
     </tbody>
     </table>
     <p class="profile">__ANONYMOUS_MSG_ADV__</p>
     <dl class="wide"><dt>MODSMO</dt></dl>
-    <table class="profile">
+    <table id="tableMODSMO" class="profile">
     <thead>
         __TABLE_HEADER_MODSMO__
     </thead>
-    <tbody>
+    <tbody class="list">
         __TABLE_MODSMO__
     </tbody>
     </table>
     <p class="profile">__ANONYMOUS_MSG_MODSMO__</p>
     <dl class="wide"><dt>Special Contests</dt></dl>
-    <table class="profile">
+    <table id="tableSPECIAL" class="profile">
     <thead>
         __TABLE_HEADER_SPECIAL__
     </thead>
-    <tbody>
+    <tbody class="list">
         __TABLE_SPECIAL__
     </tbody>
     </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script>
+        var options4 = {
+            valueNames: ["Contest", "P1", "P2", "P3", "P4", "Total", "Rank", "Award"]
+        };
+        var options6 = {
+            valueNames: ["Contest", "P1", "P2", "P3", "P4", "P5", "P6", "Total", "Rank", "Award"]
+        }
+        var listBEG = new List("tableBEG", options4);
+        var listINT = new List("tableINT", options4);
+        var listADV = new List("tableADV", options4);
+        var listMODSMO = new List("tableMODSMO", options6);
+        var listSPECIAL = new List("tableSPECIAL", options4);
+    </script>
+
     <p class="profile">__ANONYMOUS_MSG_SPECIAL__</p>
     </dl>
 </div>

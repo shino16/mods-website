@@ -30,6 +30,18 @@
 	background-color: #eee8aa;
 }
 
+#main th.sort:after {
+	content:"◆";
+}
+
+#main th.sort.desc:after {
+	content:"▼";
+}
+
+#main th.sort.asc:after {
+	content:"▲";
+}
+
 #main thead a, #main thead a:hover, #main thead a:visited
 {
 	/* font-weight: normal; */

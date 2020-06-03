@@ -38,7 +38,6 @@ def run(month):
             rowhtml = templates.get("timeline/month/individual_row_" + str(len(row["scores"])))
             rowhtml = rowhtml.replace("__TOTAL_SCORE__", str(row["total_score"]))
             rowhtml = rowhtml.replace("__RANK__", str(row["rank"]))
-            rowhtml = rowhtml.replace("__TABLE_HEADER__", str())
 
             for i, x in enumerate(row["scores"]):
                 rowhtml = rowhtml.replace(f"__SCORE_{i+1}__", str(x))
@@ -65,11 +64,14 @@ def run(month):
                 tablehtml += rowhtml
 
     header = ""
+    script = ""
     if month in s_db_y and len(s_db_y[month]) >= 1:
         header = templates.get("timeline/month/individual_header_" + str(len(s_db_y[month][0]["scores"])))
+        script = templates.get("timeline/month/individual_script_" + str(len(s_db_y[month][0]["scores"])))
 
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__TABLE_HEADER__", header)
+    html = html.replace("__SORT_SCRIPT__", script)
 
     html = html.replace("__ANONYMOUS_MSG__",
                         "The names of anonymous contestants are not shown." if anonymous_found else "")

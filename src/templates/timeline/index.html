@@ -11,18 +11,26 @@
 __HEADER_SIDE__
 <div id="main">
 	<h2>Timeline</h2>
-	<table>
+	<table id="table">
 	<thead>
 	<tr>
-	<th>#</th>
-	<th class="highlightDown">Contest</th>
-	<th>Date</th>
-	<th>Contestants</tr>
+	<th class="sort" data-sort="number">#</th>
+	<th class="sort" data-sort="contest" class="highlightDown">Contest</th>
+	<th class="sort" data-sort="date">Date</th>
+	<th class="sort" data-sort="contestants">Contestants</tr>
 	</thead>
-	<tbody>
+	<tbody class="list">
 	__TABLE__
 	</tbody>
 	</table>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+	<script>
+		var options = {
+			valueNames: ["number", "contest", "date", "contestants"]
+		};
+		var userList = new List("table", options);
+	</script>
+
 </div>
 __FOOTER__
 </body>

@@ -11,25 +11,33 @@
 __HEADER_SIDE__
 <div id="main">
 	<h2>List of contestants</h2>
-	<table>
+	<table id="table">
 	<thead>
 	<tr>
-  <th rowspan="2">UserID</th>
-  <th rowspan="2">Contestant</th>
+  <th class="sort" data-sort="UserID" rowspan="2">UserID</th>
+  <th class="sort" data-sort="Contestant" rowspan="2">Contestant</th>
   <th colspan="4">Awards</th>
-  <th rowspan="2">Participations</th>
+  <th class="sort" data-sort="Participations" rowspan="2">Participations</th>
   </tr>
   <tr>
-  <th title="Gold medal">G</th>
-  <th title="Silver medal">S</th>
-  <th title="Bronze medal">B</th>
-  <th title="Honourable mention">HM</th>
+  <th class="sort" data-sort="G" title="Gold medal">G</th>
+  <th class="sort" data-sort="S" title="Silver medal">S</th>
+  <th class="sort" data-sort="B" title="Bronze medal">B</th>
+  <th class="sort" data-sort="HM" title="Honourable mention">HM</th>
   </tr>
 	</thead>
-	<tbody>
+	<tbody class="list">
 	__TABLE__
 	</tbody>
-	</table>
+  </table>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script>
+      var options = {
+          valueNames: ["UserID", "Contestant", "G", "S", "B", "HM", "Participations"]
+      };
+      var userList = new List("table", options);
+  </script>
+
 </div>
 __FOOTER__
 </body>

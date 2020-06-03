@@ -18,22 +18,37 @@ __HEADER_SIDE__
     <input type="submit" value="Search" class="btnSubmit" onclick="mods_search()" />
     <span>(Search the MODS database for a particular contestant)</span>
     </p>
-    <table>
-        <thead><tr><th>UserID</th><th>Contestant</th><th>Contest</th><th>Total</th><th>Rank</th><th>Award</th></tr></thead>
-    <tbody id="search_results">
+    <table id="table">
+        <thead><tr>
+            <th class="sort" data-sort="UserID">UserID</th>
+            <th class="sort" data-sort="Contestant">Contestant</th>
+            <th class="sort" data-sort="Contest">Contest</th>
+            <th class="sort" data-sort="Total">Total</th>
+            <th class="sort" data-sort="Rank">Rank</th>
+            <th data-sort="Award">Award</th>
+        </tr></thead>
+    <tbody id="search_results" class="list">
     </tbody>
     </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ["UserID", "Contestant", "Contest", "Total", "Rank", "Award"]
+        };
+        var userList = new List("table", options);
+    </script>
+
 </div>
 __FOOTER__
 <table>
 
 <tr style="display: none;" id="t_row">
-    <td><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{userId}}</a></td>
-    <td><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{name}}</a></td>
-    <td><a href="__ROOT__/timeline/{{month}}/__INDEX__">{{contest}}</a></td>
-    <td align="right">{{totalScore}}</td>
-    <td align="right">{{rank}}</td>
-    <td>{{medal}}</td>
+    <td class="UserID"><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{userId}}</a></td>
+    <td class="Contestant"><a href="__ROOT__/contestants/{{userId}}/__INDEX__">{{name}}</a></td>
+    <td class="Contest"><a href="__ROOT__/timeline/{{month}}/__INDEX__">{{contest}}</a></td>
+    <td class="Total" align="right">{{totalScore}}</td>
+    <td class="Rank" align="right">{{rank}}</td>
+    <td class="Award">{{medal}}</td>
 </tr>
 </table>
 <div style="display: none;" id="t_gold"><img src="__ROOT__/img/gold.png" width="9" height="9"> Gold Medal</div>
