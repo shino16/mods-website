@@ -71,9 +71,7 @@ for _, entries in contestant_grouped.items():
     entries.sort(key=lambda entry: entry["month"], reverse=True)
 
 for month, entries in month_grouped.items():
-    if month != "2019-05" and int(month_indexed[month]["p_student"]) != len(entries):
-        print(month)
-        print(month_indexed[month])
-        print([entry["name"] for entry in entries])
+    if month != "2019-05" and month_indexed[month]["p_student"] and \
+       int(month_indexed[month]["p_student"]) != len(entries):
         raise Exception(f"Number of participants in {month} does not match")
     entries.sort(key=lambda entry: entry["rank"])

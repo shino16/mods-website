@@ -64,6 +64,7 @@ def run(month):
 
 
     if month in contest_results:
+        html = html.replace("__INDIVIDUAL_STYLE__", "")
         num_problems = len(contest_results[month][0]["scores"])
         header = templates.get(f"timeline/month/stats/header_{num_problems}")
         count = [[0 for _ in range(8)] for _ in range(num_problems)]
@@ -104,6 +105,7 @@ def run(month):
                    .replace("__TABLE_MAX__", maxs) \
                    .replace("__TABLE_SIGMA__", sigmas)
     else:
+        html = html.replace("__INDIVIDUAL_STYLE__", "display: none;")
         html = html.replace("__STATS_STYLE__", "display: none;")
 
 
