@@ -21,6 +21,8 @@ def run():
         for entry in t_db:
             f.write(",".join(map(enc, entry.values())))
             f.write("\n")
+    with open("../dest/CNAME", "w", encoding="utf8") as f:
+        f.write("mathematics.isodn.org")
 
 if __name__ == "__main__":
     run()
