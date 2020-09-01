@@ -28,7 +28,8 @@ def parse_dates(row):
         return bool(re.fullmatch(r"[A-Z][a-z][a-z]-\d\d.*", cell))
 
     dates = [cell[:6] for cell in row if is_date(cell)]
-    assert(len(dates) > 0)
+    if len(dates) == 0:
+        return ""
 
     month = dates[0][:3]
     return dates[0][4:] + "–" + dates[-1][4:] + " " + month + " " + row[0][:4]
