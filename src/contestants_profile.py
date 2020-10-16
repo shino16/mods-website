@@ -3,7 +3,7 @@ import sys
 import util
 import templates
 from os import path
-from database_timeline import month_indexed as timeline
+from database_timeline import id_indexed as timeline
 from database_students import contestant_history
 from database_students import contestant_grouped
 

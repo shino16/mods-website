@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import util
 import config
-from database_timeline import month_indexed as t_db_m
+from database_timeline import id_indexed as t_db_m
 
 
 def get(path, templates={}):

@@ -1,13 +1,14 @@
 #!/usr/bin/python
 import re
-from database_timeline import month_indexed
+import csv
+from database_timeline import id_indexed
 from fetch_data import read_sheet
 
 
 database = []
 contestant_grouped = {}
 contestant_history = {}
-month_grouped = {}
+id_grouped = {}
 
 
 tab_name = ["Contest Database", "MODSMO Database"]
@@ -19,7 +20,7 @@ anonymity_ix = [6, 7]
 
 def is_valid(row, index):
     res = row and re.fullmatch(r"\d\d\d\d-\d\d-.+", row[0])
-    res = res and (row[0][:7] in month_indexed)
+    res = res and (row[0][:7] in id_indexed)
     res = res and re.fullmatch(r"\d+", row[1])
     res = res and re.fullmatch(r".+#\d\d\d\d", row[scores_ix[index][0]-1])
 
@@ -39,12 +40,13 @@ for index in range(2):
 
         entry = {
             "month": row[0][:7],
+            "id": row[0][:7],
             "user-id": row[1],
             "name": row[scores_ix[index][0]-1],
-            "scores": [int(row[i]) for i in scores_ix[index]],
-            "total_score": int(row[scores_ix[index][-1]+1]),
+            "scores": [row[i] for i in scores_ix[index]],
+            "total_score": row[scores_ix[index][-1]+1],
             "rank": int(row[scores_ix[index][-1]+2]),
-            "contest_name": month_indexed[row[0][:7]]["name"],
+            "contest_name": id_indexed[row[0][:7]]["name"],
             "medal": row[-1][0] if len(row) == width[index] else "",
             "is_anonymous": row[anonymity_ix[index]] == "Yes"
         }
@@ -56,9 +58,9 @@ for index in range(2):
         if entry["user-id"] not in contestant_grouped:
             contestant_grouped[entry["user-id"]] = []
         contestant_grouped[entry["user-id"]].append(entry)
-        if entry["month"] not in month_grouped:
-            month_grouped[entry["month"]] = []
-        month_grouped[entry["month"]].append(entry)
+        if entry["month"] not in id_grouped:
+            id_grouped[entry["month"]] = []
+        id_grouped[entry["month"]].append(entry)
 
     for contestant, entries in contestant_grouped.items():
         contestant_history[contestant] = {
@@ -70,8 +72,35 @@ for index in range(2):
 for _, entries in contestant_grouped.items():
     entries.sort(key=lambda entry: entry["month"], reverse=True)
 
-for month, entries in month_grouped.items():
-    if month != "2019-05" and month_indexed[month]["p_student"] and \
-       int(month_indexed[month]["p_student"]) != len(entries):
+for month, entries in id_grouped.items():
+    if month != "2019-05" and id_indexed[month]["p_student"] and \
+       int(id_indexed[month]["p_student"]) != len(entries):
         raise Exception(f"Number of participants in {month} does not match")
     entries.sort(key=lambda entry: entry["rank"])
+
+
+for diff in ("Easy", "Hard"):
+    id = "GQMO-" + diff
+    id_grouped[id] = []
+    rank = [0 for _ in range(100)]
+    with open(f"../database/GQMO {diff} Exam.csv") as f:
+        reader = csv.reader(f)
+        for i, row in enumerate(reader):
+            sz = len(row[:-1])
+            entry = {
+                "month": "2020",
+                "id": id,
+                "user-id": "",
+                "name": "",
+                "scores": row[:-1],
+                "total_score": row[-1],
+                "contest_name": "GQMO Easy",
+                "medal": "",
+                "is_anonymous": True
+            }
+            id_grouped[id].append(entry)
+            rank[int(entry["total_score"])] += 1
+        for i in range(99, 0, -1):
+            rank[i - 1] += rank[i]
+        for entry in id_grouped[id]:
+            entry["rank"] = rank[int(entry["total_score"]) + 1] + 1

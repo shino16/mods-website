@@ -2,30 +2,30 @@
 import sys
 import util
 import templates
-from database_students import month_grouped as s_db_y
-from database_timeline import month_indexed as t_db_m
+from database_students import id_grouped as s_db_y
+from database_timeline import id_indexed as t_db_m
 from database_timeline import previous_month
 from database_timeline import next_month
 
-def run(month):
-    print("Creating timeline/" + month + "/individual")
+def run(id):
+    print("Creating timeline/" + id + "/individual")
     html = templates.get("timeline/month/individual")
     html = templates.initial_replace(html, 1)
-    monthdata = t_db_m[month]
-    html = html.replace("__MONTH__", month)
+    monthdata = t_db_m[id]
+    html = html.replace("__MONTH__", id)
     html = html.replace("__CONTEST_NAME__", monthdata["name"])
     html = html.replace("__NUMBER__", monthdata["number"])
     html = html.replace("__ORDINAL__", util.ordinal(monthdata["number"]))
 
-    if month in previous_month:
-        html = html.replace("__PREVIOUS_MONTH__", previous_month[month])
+    if id in previous_month:
+        html = html.replace("__PREVIOUS_MONTH__", previous_month[id])
         html = html.replace("__PREVIOUS_MONTH_STYLE__", "")
     else:
         html = html.replace("__PREVIOUS_MONTH_STYLE__", "display: none;")
         html = html.replace("__PREVIOUS_MONTH__", ".") # Google crawler fix
 
-    if month in next_month:
-        html = html.replace("__NEXT_MONTH__", next_month[month])
+    if id in next_month:
+        html = html.replace("__NEXT_MONTH__", next_month[id])
         html = html.replace("__NEXT_MONTH_STYLE__", "")
     else:
         html = html.replace("__NEXT_MONTH_STYLE__", "display: none;")
@@ -33,8 +33,8 @@ def run(month):
 
     tablehtml = ""
     anonymous_found = False
-    if month in s_db_y:
-        for row in s_db_y[month]:
+    if id in s_db_y:
+        for row in s_db_y[id]:
             rowhtml = templates.get("timeline/month/individual_row_" + str(len(row["scores"])))
             rowhtml = rowhtml.replace("__TOTAL_SCORE__", str(row["total_score"]))
             rowhtml = rowhtml.replace("__RANK__", str(row["rank"]))
@@ -65,9 +65,9 @@ def run(month):
 
     header = ""
     script = ""
-    if month in s_db_y and len(s_db_y[month]) >= 1:
-        header = templates.get("timeline/month/individual_header_" + str(len(s_db_y[month][0]["scores"])))
-        script = templates.get("timeline/month/individual_script_" + str(len(s_db_y[month][0]["scores"])))
+    if id in s_db_y and len(s_db_y[id]) >= 1:
+        header = templates.get("timeline/month/individual_header_" + str(len(s_db_y[id][0]["scores"])))
+        script = templates.get("timeline/month/individual_script_" + str(len(s_db_y[id][0]["scores"])))
 
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__TABLE_HEADER__", header)
@@ -77,7 +77,7 @@ def run(month):
                         "The names of anonymous contestants are not shown." if anonymous_found else "")
 
     html = templates.final_replace(html, "../..")
-    util.writefile("../dest/timeline/" + month + "/individual.html", html)
+    util.writefile("../dest/timeline/" + id + "/individual.html", html)
 
 if __name__ == "__main__":
     run(sys.argv[1])

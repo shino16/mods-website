@@ -121,6 +121,12 @@
 	border: 1px solid #BEB761;
 }
 
+#main td.notes
+{
+	background-color: #FFFFF2;
+	border: transparent;
+}
+
 #main table.profile,
 #main table.stats {
 	margin-inline-start: 30px;

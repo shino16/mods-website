@@ -14,9 +14,12 @@ def run():
         rowhtml = templates.get("timeline/index_row")
         rowhtml = rowhtml.replace("__NUMBER__", row["number"])
         rowhtml = rowhtml.replace("__MONTH__", row["month"])
+        rowhtml = rowhtml.replace("__ID__", row["id"])
         rowhtml = rowhtml.replace("__CONTEST_NAME__", row["name"])
         rowhtml = rowhtml.replace("__DATE__", row["date"])
+        rowhtml = rowhtml.replace("__TIMESTAMP__", row["timestamp"])
         rowhtml = rowhtml.replace("__P_STUDENT__", row["p_student"])
+        rowhtml = rowhtml.replace("__NOTES__", row["notes"])
         tablehtml = rowhtml + tablehtml
     html = html.replace("__TABLE__", tablehtml)
 

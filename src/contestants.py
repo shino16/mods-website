@@ -10,8 +10,9 @@ def run():
     util.makedirs("../dest/contestants")
     contestants_index.run()
     for data in database:
-        os.makedirs(os.path.normpath("../dest/contestants/" + data["user-id"]), exist_ok=True)
-        contestants_profile.run(data["user-id"])
+        if data["user-id"]:
+            os.makedirs(os.path.normpath("../dest/contestants/" + data["user-id"]), exist_ok=True)
+            contestants_profile.run(data["user-id"])
 
 
 if __name__ == "__main__":
