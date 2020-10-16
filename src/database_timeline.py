@@ -44,6 +44,7 @@ for i, row in enumerate(filter(is_valid, read_sheet(tab_name, sheet_range))):
         "id": row[0][:7],
         "date": parse_dates(row),
         "p_student": row[column_no_participants],
+        "userinfo_available": True,
         "notes": "",
     }
     entry["display_name"] = entry["name"]
@@ -60,6 +61,7 @@ gqmo_easy = {
     "id": "GQMO-Easy",
     "date": "09–10 May 2020",
     "timestamp": "2020-05 09–10 May 2020e",
+    "userinfo_available": False,
     "p_student": "254",
     "notes": "Organized by Swiss Maths Olympiad",
 }
@@ -71,6 +73,7 @@ gqmo_hard = {
     "id": "GQMO-Hard",
     "date": "16–17 May 2020",
     "timestamp": "2020-05 16",
+    "userinfo_available": False,
     "p_student": "313",
     "notes": "Organized by Swiss Maths Olympiad",
 }

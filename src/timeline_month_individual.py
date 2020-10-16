@@ -53,21 +53,29 @@ def run(id):
             else:
                 rowhtml = rowhtml.replace("__MEDAL__", "")
 
-            if row["is_anonymous"]:
+            if not monthdata["userinfo_available"]:
+                rowhtml = rowhtml.replace("__USERINFO_STYLE__", "display: none;")
+            elif row["is_anonymous"]:
                 rowhtml = rowhtml.replace("__NAME__", "")
                 rowhtml = rowhtml.replace("__USER_ID__", "")
-                tablehtml += rowhtml
                 anonymous_found = True
             else:
                 rowhtml = rowhtml.replace("__NAME__", row["name"])
                 rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
-                tablehtml += rowhtml
+
+            rowhtml = rowhtml.replace("__USERINFO_STYLE__", "")
+            tablehtml += rowhtml
 
     header = ""
     script = ""
     if id in s_db_y and len(s_db_y[id]) >= 1:
         header = templates.get("timeline/month/individual_header_" + str(len(s_db_y[id][0]["scores"])))
+        if not monthdata["userinfo_available"]:
+            header = header.replace("__USERINFO_STYLE__", "display: none;")
+        else:
+            header = header.replace("__USERINFO_STYLE__", "")
         script = templates.get("timeline/month/individual_script_" + str(len(s_db_y[id][0]["scores"])))
+
 
     html = html.replace("__TABLE__", tablehtml)
     html = html.replace("__TABLE_HEADER__", header)
