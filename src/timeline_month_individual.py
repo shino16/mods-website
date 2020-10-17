@@ -12,8 +12,9 @@ def run(id):
     html = templates.get("timeline/month/individual")
     html = templates.initial_replace(html, 1)
     monthdata = t_db_m[id]
-    html = html.replace("__MONTH__", id)
+    html = html.replace("__MONTH__", monthdata["month"])
     html = html.replace("__CONTEST_NAME__", monthdata["name"])
+    html = html.replace("__CONTEST_DISPLAY_NAME__", monthdata["display_name"])
     html = html.replace("__NUMBER__", monthdata["number"])
     html = html.replace("__ORDINAL__", util.ordinal(monthdata["number"]))
 
