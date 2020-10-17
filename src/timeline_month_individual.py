@@ -37,7 +37,7 @@ def run(id):
         for row in s_db_y[id]:
             rowhtml = templates.get("timeline/month/individual_row_" + str(len(row["scores"])))
             rowhtml = rowhtml.replace("__TOTAL_SCORE__", str(row["total_score"]))
-            rowhtml = rowhtml.replace("__RANK__", str(row["rank"]))
+            rowhtml = rowhtml.replace("__RANK__", row["rank"])
 
             for i, x in enumerate(row["scores"]):
                 rowhtml = rowhtml.replace(f"__SCORE_{i+1}__", str(x))
@@ -62,6 +62,12 @@ def run(id):
             else:
                 rowhtml = rowhtml.replace("__NAME__", row["name"])
                 rowhtml = rowhtml.replace("__USER_ID__", row["user-id"])
+
+            if monthdata["percentile_available"]:
+                rowhtml = rowhtml.replace("__PERCENTILE_STYLE__", "")
+                rowhtml = rowhtml.replace("__PERCENTILE__", row["percentile"])
+            else:
+                rowhtml = rowhtml.replace("__PERCENTILE_STYLE__", "display: none;")
 
             rowhtml = rowhtml.replace("__USERINFO_STYLE__", "")
             tablehtml += rowhtml

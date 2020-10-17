@@ -108,8 +108,6 @@ def run(id):
                    .replace("__TABLE_MAX__", maxs) \
                    .replace("__TABLE_SIGMA__", sigmas)
     else:
-        print(id, "not found")
-        assert id != "GQMO-Hard"
         html = html.replace("__INDIVIDUAL_STYLE__", "display: none;")
         html = html.replace("__STATS_STYLE__", "display: none;")
 

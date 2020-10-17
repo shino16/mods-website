@@ -45,7 +45,7 @@ for index in range(2):
             "name": row[scores_ix[index][0]-1],
             "scores": [row[i] for i in scores_ix[index]],
             "total_score": row[scores_ix[index][-1]+1],
-            "rank": int(row[scores_ix[index][-1]+2]),
+            "rank": row[scores_ix[index][-1]+2],
             "contest_name": id_indexed[row[0][:7]]["name"],
             "medal": row[-1][0] if len(row) == width[index] else "",
             "is_anonymous": row[anonymity_ix[index]] == "Yes"
@@ -103,4 +103,6 @@ for diff in ("Easy", "Hard"):
         for i in range(99, 0, -1):
             rank[i - 1] += rank[i]
         for entry in id_grouped[id]:
-            entry["rank"] = rank[int(entry["total_score"]) + 1] + 1
+            score = int(entry["total_score"])
+            entry["rank"] = str(rank[score + 1] + 1)
+            entry["percentile"] = "{:.2f}".format((rank[0] - rank[score + 1]) / rank[0] * 100)
