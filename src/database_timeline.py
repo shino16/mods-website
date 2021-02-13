@@ -25,14 +25,15 @@ def parse_contest_name(raw):
 
 def parse_dates(row):
     def is_date(cell):
-        return bool(re.fullmatch(r"[A-Z][a-z][a-z]-\d\d.*", cell))
+        return bool(re.fullmatch(r"[A-Z][a-z][a-z][a-z]?-\d\d.*", cell))
 
-    dates = [cell[:6] for cell in row if is_date(cell)]
+    dates = [cell[:cell.index(' ')] for cell in row if is_date(cell)]
     if len(dates) == 0:
         return ""
 
-    month = dates[0][:3]
-    return dates[0][4:] + "–" + dates[-1][4:] + " " + month + " " + row[0][:4]
+    hyphen = dates[0].index('-')
+    month = dates[0][:hyphen]
+    return dates[0][hyphen + 1:] + "–" + dates[-1][hyphen + 1:] + " " + month + " " + row[0][:4]
 
 column_no_participants = 6
 
