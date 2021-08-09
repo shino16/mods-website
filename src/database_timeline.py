@@ -42,7 +42,7 @@ for i, row in enumerate(filter(is_valid, read_sheet(tab_name, sheet_range))):
     entry = {
         "name": parse_contest_name(row[0][8:]),
         "month": row[0][:7],
-        "id": row[0][:7],
+        "id": row[0],
         "date": parse_dates(row),
         "p_student": row[column_no_participants],
         "userinfo_available": True,

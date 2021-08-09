@@ -10,6 +10,7 @@ def run():
     util.makedirs("../dest/timeline")
     timeline_index.run()
     for monthdata in t_db:
+        print(">>>>", monthdata["id"])
         timeline_month.run(monthdata["id"])
 
 if __name__ == "__main__":
