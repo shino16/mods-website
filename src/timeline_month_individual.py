@@ -81,6 +81,10 @@ def run(id):
             header = header.replace("__USERINFO_STYLE__", "display: none;")
         else:
             header = header.replace("__USERINFO_STYLE__", "")
+        if monthdata["percentile_available"]:
+            header = header.replace("__PERCENTILE_STYLE__", "")
+        else:
+            header = header.replace("__PERCENTILE_STYLE__", "display: none;")
         script = templates.get("timeline/month/individual_script_" + str(len(s_db_y[id][0]["scores"])))
 
 
